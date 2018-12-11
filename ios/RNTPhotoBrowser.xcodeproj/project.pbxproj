@@ -1,0 +1,482 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9D42EBA721BF50D400CC3487 /* RNTPhotoBrowserModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D42EBA621BF50D400CC3487 /* RNTPhotoBrowserModule.m */; };
+		9D42EBFE21BF542300CC3487 /* PhotoBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D42EBFD21BF542300CC3487 /* PhotoBrowser.swift */; };
+		9D42EC2121BF563800CC3487 /* JXPhotoBrowserFadeTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D42EC0121BF563700CC3487 /* JXPhotoBrowserFadeTransitioning.swift */; };
+		9D42EC2221BF563800CC3487 /* JXPhotoBrowserZoomTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D42EC0221BF563700CC3487 /* JXPhotoBrowserZoomTransitioning.swift */; };
+		9D42EC2321BF563800CC3487 /* JXPhotoBrowserPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D42EC0321BF563700CC3487 /* JXPhotoBrowserPresentationController.swift */; };
+		9D42EC2421BF563800CC3487 /* JXPhotoBrowserTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D42EC0421BF563700CC3487 /* JXPhotoBrowserTransitioning.swift */; };
+		9D42EC2521BF563800CC3487 /* JXPhotoBrowserProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D42EC0621BF563700CC3487 /* JXPhotoBrowserProgressView.swift */; };
+		9D42EC2621BF563800CC3487 /* JXPhotoBrowserRawButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D42EC0721BF563700CC3487 /* JXPhotoBrowserRawButtonCell.swift */; };
+		9D42EC2721BF563800CC3487 /* JXNetworkingDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D42EC0821BF563700CC3487 /* JXNetworkingDataSource.swift */; };
+		9D42EC2821BF563800CC3487 /* JXRawImageDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D42EC0921BF563700CC3487 /* JXRawImageDataSource.swift */; };
+		9D42EC2921BF563800CC3487 /* JXPhotoLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D42EC0A21BF563700CC3487 /* JXPhotoLoader.swift */; };
+		9D42EC2A21BF563800CC3487 /* JXPhotoBrowserNetworkingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D42EC0B21BF563700CC3487 /* JXPhotoBrowserNetworkingCell.swift */; };
+		9D42EC2B21BF563800CC3487 /* UICollectionView+JX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D42EC0D21BF563700CC3487 /* UICollectionView+JX.swift */; };
+		9D42EC2C21BF563800CC3487 /* UIViewController+JX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D42EC0E21BF563700CC3487 /* UIViewController+JX.swift */; };
+		9D42EC2D21BF563800CC3487 /* JXNamespace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D42EC0F21BF563700CC3487 /* JXNamespace.swift */; };
+		9D42EC2E21BF563800CC3487 /* JXPhotoBrowserZoomAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D42EC1121BF563700CC3487 /* JXPhotoBrowserZoomAnimator.swift */; };
+		9D42EC2F21BF563800CC3487 /* JXPhotoBrowserFadePresentingAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D42EC1221BF563700CC3487 /* JXPhotoBrowserFadePresentingAnimator.swift */; };
+		9D42EC3021BF563800CC3487 /* JXPhotoBrowserFadeDismissingAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D42EC1321BF563700CC3487 /* JXPhotoBrowserFadeDismissingAnimator.swift */; };
+		9D42EC3121BF563800CC3487 /* JXPhotoBrowserZoomPresentingAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D42EC1421BF563700CC3487 /* JXPhotoBrowserZoomPresentingAnimator.swift */; };
+		9D42EC3221BF563800CC3487 /* JXPhotoBrowserZoomDismissingAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D42EC1521BF563700CC3487 /* JXPhotoBrowserZoomDismissingAnimator.swift */; };
+		9D42EC3321BF563800CC3487 /* JXPhotoBrowserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D42EC1721BF563700CC3487 /* JXPhotoBrowserDelegate.swift */; };
+		9D42EC3421BF563800CC3487 /* JXPhotoBrowserTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D42EC1821BF563700CC3487 /* JXPhotoBrowserTransitioningDelegate.swift */; };
+		9D42EC3521BF563800CC3487 /* JXPhotoBrowserDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D42EC1921BF563700CC3487 /* JXPhotoBrowserDataSource.swift */; };
+		9D42EC3621BF563800CC3487 /* JXLocalDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D42EC1A21BF563700CC3487 /* JXLocalDataSource.swift */; };
+		9D42EC3721BF563800CC3487 /* JXPhotoBrowserBaseDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D42EC1B21BF563700CC3487 /* JXPhotoBrowserBaseDelegate.swift */; };
+		9D42EC3821BF563800CC3487 /* JXPhotoBrowserBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D42EC1C21BF563700CC3487 /* JXPhotoBrowserBaseCell.swift */; };
+		9D42EC3921BF563800CC3487 /* JXNumberPageControlDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D42EC1E21BF563700CC3487 /* JXNumberPageControlDelegate.swift */; };
+		9D42EC3A21BF563800CC3487 /* JXDefaultPageControlDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D42EC1F21BF563700CC3487 /* JXDefaultPageControlDelegate.swift */; };
+		9D42EC3B21BF563800CC3487 /* JXPhotoBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D42EC2021BF563700CC3487 /* JXPhotoBrowser.swift */; };
+		9D42EC6321BF5D0E00CC3487 /* RNTPhotoBrowserModule.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D42EBA521BF50D400CC3487 /* RNTPhotoBrowserModule.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9D42EB9021BF503600CC3487 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				9D42EC6321BF5D0E00CC3487 /* RNTPhotoBrowserModule.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		9D42EB9221BF503600CC3487 /* libRNTPhotoBrowser.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNTPhotoBrowser.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D42EBA521BF50D400CC3487 /* RNTPhotoBrowserModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNTPhotoBrowserModule.h; sourceTree = "<group>"; };
+		9D42EBA621BF50D400CC3487 /* RNTPhotoBrowserModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNTPhotoBrowserModule.m; sourceTree = "<group>"; };
+		9D42EBFC21BF542200CC3487 /* RNTPhotoBrowser-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RNTPhotoBrowser-Bridging-Header.h"; sourceTree = "<group>"; };
+		9D42EBFD21BF542300CC3487 /* PhotoBrowser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoBrowser.swift; sourceTree = "<group>"; };
+		9D42EC0121BF563700CC3487 /* JXPhotoBrowserFadeTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserFadeTransitioning.swift; sourceTree = "<group>"; };
+		9D42EC0221BF563700CC3487 /* JXPhotoBrowserZoomTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserZoomTransitioning.swift; sourceTree = "<group>"; };
+		9D42EC0321BF563700CC3487 /* JXPhotoBrowserPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserPresentationController.swift; sourceTree = "<group>"; };
+		9D42EC0421BF563700CC3487 /* JXPhotoBrowserTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserTransitioning.swift; sourceTree = "<group>"; };
+		9D42EC0621BF563700CC3487 /* JXPhotoBrowserProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserProgressView.swift; sourceTree = "<group>"; };
+		9D42EC0721BF563700CC3487 /* JXPhotoBrowserRawButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserRawButtonCell.swift; sourceTree = "<group>"; };
+		9D42EC0821BF563700CC3487 /* JXNetworkingDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXNetworkingDataSource.swift; sourceTree = "<group>"; };
+		9D42EC0921BF563700CC3487 /* JXRawImageDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXRawImageDataSource.swift; sourceTree = "<group>"; };
+		9D42EC0A21BF563700CC3487 /* JXPhotoLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoLoader.swift; sourceTree = "<group>"; };
+		9D42EC0B21BF563700CC3487 /* JXPhotoBrowserNetworkingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserNetworkingCell.swift; sourceTree = "<group>"; };
+		9D42EC0D21BF563700CC3487 /* UICollectionView+JX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+JX.swift"; sourceTree = "<group>"; };
+		9D42EC0E21BF563700CC3487 /* UIViewController+JX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+JX.swift"; sourceTree = "<group>"; };
+		9D42EC0F21BF563700CC3487 /* JXNamespace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXNamespace.swift; sourceTree = "<group>"; };
+		9D42EC1121BF563700CC3487 /* JXPhotoBrowserZoomAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserZoomAnimator.swift; sourceTree = "<group>"; };
+		9D42EC1221BF563700CC3487 /* JXPhotoBrowserFadePresentingAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserFadePresentingAnimator.swift; sourceTree = "<group>"; };
+		9D42EC1321BF563700CC3487 /* JXPhotoBrowserFadeDismissingAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserFadeDismissingAnimator.swift; sourceTree = "<group>"; };
+		9D42EC1421BF563700CC3487 /* JXPhotoBrowserZoomPresentingAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserZoomPresentingAnimator.swift; sourceTree = "<group>"; };
+		9D42EC1521BF563700CC3487 /* JXPhotoBrowserZoomDismissingAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserZoomDismissingAnimator.swift; sourceTree = "<group>"; };
+		9D42EC1721BF563700CC3487 /* JXPhotoBrowserDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserDelegate.swift; sourceTree = "<group>"; };
+		9D42EC1821BF563700CC3487 /* JXPhotoBrowserTransitioningDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserTransitioningDelegate.swift; sourceTree = "<group>"; };
+		9D42EC1921BF563700CC3487 /* JXPhotoBrowserDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserDataSource.swift; sourceTree = "<group>"; };
+		9D42EC1A21BF563700CC3487 /* JXLocalDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXLocalDataSource.swift; sourceTree = "<group>"; };
+		9D42EC1B21BF563700CC3487 /* JXPhotoBrowserBaseDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserBaseDelegate.swift; sourceTree = "<group>"; };
+		9D42EC1C21BF563700CC3487 /* JXPhotoBrowserBaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserBaseCell.swift; sourceTree = "<group>"; };
+		9D42EC1E21BF563700CC3487 /* JXNumberPageControlDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXNumberPageControlDelegate.swift; sourceTree = "<group>"; };
+		9D42EC1F21BF563700CC3487 /* JXDefaultPageControlDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXDefaultPageControlDelegate.swift; sourceTree = "<group>"; };
+		9D42EC2021BF563700CC3487 /* JXPhotoBrowser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowser.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9D42EB8F21BF503600CC3487 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9D42EB8921BF503600CC3487 = {
+			isa = PBXGroup;
+			children = (
+				9D42EB9421BF503600CC3487 /* RNTPhotoBrowser */,
+				9D42EB9321BF503600CC3487 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9D42EB9321BF503600CC3487 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9D42EB9221BF503600CC3487 /* libRNTPhotoBrowser.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9D42EB9421BF503600CC3487 /* RNTPhotoBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				9D42EBFF21BF563700CC3487 /* Core */,
+				9D42EBA521BF50D400CC3487 /* RNTPhotoBrowserModule.h */,
+				9D42EBA621BF50D400CC3487 /* RNTPhotoBrowserModule.m */,
+				9D42EBFD21BF542300CC3487 /* PhotoBrowser.swift */,
+				9D42EBFC21BF542200CC3487 /* RNTPhotoBrowser-Bridging-Header.h */,
+			);
+			path = RNTPhotoBrowser;
+			sourceTree = "<group>";
+		};
+		9D42EBFF21BF563700CC3487 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				9D42EC0021BF563700CC3487 /* Transition */,
+				9D42EC0521BF563700CC3487 /* Networking */,
+				9D42EC0C21BF563700CC3487 /* Utils */,
+				9D42EC1021BF563700CC3487 /* Animator */,
+				9D42EC1621BF563700CC3487 /* Protocol */,
+				9D42EC1A21BF563700CC3487 /* JXLocalDataSource.swift */,
+				9D42EC1B21BF563700CC3487 /* JXPhotoBrowserBaseDelegate.swift */,
+				9D42EC1C21BF563700CC3487 /* JXPhotoBrowserBaseCell.swift */,
+				9D42EC1D21BF563700CC3487 /* Enhance */,
+				9D42EC2021BF563700CC3487 /* JXPhotoBrowser.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		9D42EC0021BF563700CC3487 /* Transition */ = {
+			isa = PBXGroup;
+			children = (
+				9D42EC0121BF563700CC3487 /* JXPhotoBrowserFadeTransitioning.swift */,
+				9D42EC0221BF563700CC3487 /* JXPhotoBrowserZoomTransitioning.swift */,
+				9D42EC0321BF563700CC3487 /* JXPhotoBrowserPresentationController.swift */,
+				9D42EC0421BF563700CC3487 /* JXPhotoBrowserTransitioning.swift */,
+			);
+			path = Transition;
+			sourceTree = "<group>";
+		};
+		9D42EC0521BF563700CC3487 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				9D42EC0621BF563700CC3487 /* JXPhotoBrowserProgressView.swift */,
+				9D42EC0721BF563700CC3487 /* JXPhotoBrowserRawButtonCell.swift */,
+				9D42EC0821BF563700CC3487 /* JXNetworkingDataSource.swift */,
+				9D42EC0921BF563700CC3487 /* JXRawImageDataSource.swift */,
+				9D42EC0A21BF563700CC3487 /* JXPhotoLoader.swift */,
+				9D42EC0B21BF563700CC3487 /* JXPhotoBrowserNetworkingCell.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		9D42EC0C21BF563700CC3487 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				9D42EC0D21BF563700CC3487 /* UICollectionView+JX.swift */,
+				9D42EC0E21BF563700CC3487 /* UIViewController+JX.swift */,
+				9D42EC0F21BF563700CC3487 /* JXNamespace.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		9D42EC1021BF563700CC3487 /* Animator */ = {
+			isa = PBXGroup;
+			children = (
+				9D42EC1121BF563700CC3487 /* JXPhotoBrowserZoomAnimator.swift */,
+				9D42EC1221BF563700CC3487 /* JXPhotoBrowserFadePresentingAnimator.swift */,
+				9D42EC1321BF563700CC3487 /* JXPhotoBrowserFadeDismissingAnimator.swift */,
+				9D42EC1421BF563700CC3487 /* JXPhotoBrowserZoomPresentingAnimator.swift */,
+				9D42EC1521BF563700CC3487 /* JXPhotoBrowserZoomDismissingAnimator.swift */,
+			);
+			path = Animator;
+			sourceTree = "<group>";
+		};
+		9D42EC1621BF563700CC3487 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				9D42EC1721BF563700CC3487 /* JXPhotoBrowserDelegate.swift */,
+				9D42EC1821BF563700CC3487 /* JXPhotoBrowserTransitioningDelegate.swift */,
+				9D42EC1921BF563700CC3487 /* JXPhotoBrowserDataSource.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		9D42EC1D21BF563700CC3487 /* Enhance */ = {
+			isa = PBXGroup;
+			children = (
+				9D42EC1E21BF563700CC3487 /* JXNumberPageControlDelegate.swift */,
+				9D42EC1F21BF563700CC3487 /* JXDefaultPageControlDelegate.swift */,
+			);
+			path = Enhance;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9D42EB9121BF503600CC3487 /* RNTPhotoBrowser */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9D42EB9B21BF503600CC3487 /* Build configuration list for PBXNativeTarget "RNTPhotoBrowser" */;
+			buildPhases = (
+				9D42EB8E21BF503600CC3487 /* Sources */,
+				9D42EB8F21BF503600CC3487 /* Frameworks */,
+				9D42EB9021BF503600CC3487 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RNTPhotoBrowser;
+			productName = RNTPhotoBrowser;
+			productReference = 9D42EB9221BF503600CC3487 /* libRNTPhotoBrowser.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9D42EB8A21BF503600CC3487 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = finstao;
+				TargetAttributes = {
+					9D42EB9121BF503600CC3487 = {
+						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 0940;
+					};
+				};
+			};
+			buildConfigurationList = 9D42EB8D21BF503600CC3487 /* Build configuration list for PBXProject "RNTPhotoBrowser" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 9D42EB8921BF503600CC3487;
+			productRefGroup = 9D42EB9321BF503600CC3487 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9D42EB9121BF503600CC3487 /* RNTPhotoBrowser */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9D42EB8E21BF503600CC3487 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9D42EC3121BF563800CC3487 /* JXPhotoBrowserZoomPresentingAnimator.swift in Sources */,
+				9D42EC3621BF563800CC3487 /* JXLocalDataSource.swift in Sources */,
+				9D42EC3421BF563800CC3487 /* JXPhotoBrowserTransitioningDelegate.swift in Sources */,
+				9D42EC2821BF563800CC3487 /* JXRawImageDataSource.swift in Sources */,
+				9D42EC2A21BF563800CC3487 /* JXPhotoBrowserNetworkingCell.swift in Sources */,
+				9D42EC2421BF563800CC3487 /* JXPhotoBrowserTransitioning.swift in Sources */,
+				9D42EBA721BF50D400CC3487 /* RNTPhotoBrowserModule.m in Sources */,
+				9D42EC2B21BF563800CC3487 /* UICollectionView+JX.swift in Sources */,
+				9D42EC2721BF563800CC3487 /* JXNetworkingDataSource.swift in Sources */,
+				9D42EC3221BF563800CC3487 /* JXPhotoBrowserZoomDismissingAnimator.swift in Sources */,
+				9D42EC2121BF563800CC3487 /* JXPhotoBrowserFadeTransitioning.swift in Sources */,
+				9D42EC3021BF563800CC3487 /* JXPhotoBrowserFadeDismissingAnimator.swift in Sources */,
+				9D42EC3721BF563800CC3487 /* JXPhotoBrowserBaseDelegate.swift in Sources */,
+				9D42EC3B21BF563800CC3487 /* JXPhotoBrowser.swift in Sources */,
+				9D42EC3821BF563800CC3487 /* JXPhotoBrowserBaseCell.swift in Sources */,
+				9D42EC2921BF563800CC3487 /* JXPhotoLoader.swift in Sources */,
+				9D42EC2C21BF563800CC3487 /* UIViewController+JX.swift in Sources */,
+				9D42EC2321BF563800CC3487 /* JXPhotoBrowserPresentationController.swift in Sources */,
+				9D42EC2F21BF563800CC3487 /* JXPhotoBrowserFadePresentingAnimator.swift in Sources */,
+				9D42EC2D21BF563800CC3487 /* JXNamespace.swift in Sources */,
+				9D42EC3921BF563800CC3487 /* JXNumberPageControlDelegate.swift in Sources */,
+				9D42EC2221BF563800CC3487 /* JXPhotoBrowserZoomTransitioning.swift in Sources */,
+				9D42EC2E21BF563800CC3487 /* JXPhotoBrowserZoomAnimator.swift in Sources */,
+				9D42EC2621BF563800CC3487 /* JXPhotoBrowserRawButtonCell.swift in Sources */,
+				9D42EC3521BF563800CC3487 /* JXPhotoBrowserDataSource.swift in Sources */,
+				9D42EC2521BF563800CC3487 /* JXPhotoBrowserProgressView.swift in Sources */,
+				9D42EC3321BF563800CC3487 /* JXPhotoBrowserDelegate.swift in Sources */,
+				9D42EBFE21BF542300CC3487 /* PhotoBrowser.swift in Sources */,
+				9D42EC3A21BF563800CC3487 /* JXDefaultPageControlDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		9D42EB9921BF503600CC3487 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		9D42EB9A21BF503600CC3487 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9D42EB9C21BF503600CC3487 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = N276SVAZ33;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../react-native/React/**";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "RNTPhotoBrowser/RNTPhotoBrowser-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9D42EB9D21BF503600CC3487 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = N276SVAZ33;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../react-native/React/**";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "RNTPhotoBrowser/RNTPhotoBrowser-Bridging-Header.h";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9D42EB8D21BF503600CC3487 /* Build configuration list for PBXProject "RNTPhotoBrowser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9D42EB9921BF503600CC3487 /* Debug */,
+				9D42EB9A21BF503600CC3487 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9D42EB9B21BF503600CC3487 /* Build configuration list for PBXNativeTarget "RNTPhotoBrowser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9D42EB9C21BF503600CC3487 /* Debug */,
+				9D42EB9D21BF503600CC3487 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9D42EB8A21BF503600CC3487 /* Project object */;
+}

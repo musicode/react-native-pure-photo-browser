@@ -1,0 +1,7 @@
+rootProject.name = 'example'
+
+include ':react-native-pure-photo-browser'
+project(':react-native-pure-photo-browser').projectDir = new File(rootProject.projectDir,  '../node_modules/react-native-pure-photo-browser/android')
+
+
+include ':app'
