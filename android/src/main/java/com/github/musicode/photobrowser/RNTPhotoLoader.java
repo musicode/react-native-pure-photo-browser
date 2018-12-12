@@ -1,4 +1,4 @@
-package com.github.musicode;
+package com.github.musicode.photobrowser;
 
 import android.widget.ImageView;
 
