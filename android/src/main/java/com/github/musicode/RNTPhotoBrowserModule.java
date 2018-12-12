@@ -2,6 +2,7 @@
 package com.github.musicode;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.widget.ImageView;
 
 import com.facebook.react.bridge.Arguments;
@@ -76,25 +77,35 @@ public class RNTPhotoBrowserModule extends ReactContextBaseJavaModule {
           try {
               File destFile = new File(dest);
 
-              new Compressor(reactContext)
-                      .setMaxWidth(1280)
-                      .setMaxHeight(1280)
-                      .setQuality(70)
+              File result = new Compressor(reactContext)
+                      .setMaxWidth(2000)
+                      .setMaxHeight(2000)
+                      .setQuality(50)
                       .setCompressFormat(Bitmap.CompressFormat.JPEG)
                       .setDestinationDirectoryPath(destFile.getParent())
                       .compressToFile(file, destFile.getName());
 
-              WritableMap map = Arguments.createMap();
-              map.putString("path", dest);
-              callback.invoke(null, map);
+              if (result.exists()) {
+                  String path = result.getAbsolutePath();
+
+                  BitmapFactory.Options options = new BitmapFactory.Options();
+                  options.inJustDecodeBounds = true;
+                  BitmapFactory.decodeFile(path, options);
+
+                  WritableMap map = Arguments.createMap();
+                  map.putString("path", path);
+                  map.putInt("width", options.outWidth);
+                  map.putInt("height", options.outHeight);
+
+                  callback.invoke(null, map);
+                  return;
+              }
           }
           catch (IOException e) {
-              callback.invoke("io error");
+
           }
       }
-      else {
-          callback.invoke("io error");
-      }
+      callback.invoke("io error");
   }
 
 }

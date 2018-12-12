@@ -60,25 +60,24 @@ public class MainApplication extends Application implements ReactApplication {
     SoLoader.init(this, /* native exopackage */ false);
 
     RNTPhotoBrowserModule.setPhotoLoader(new RNTPhotoLoader() {
-      @Override
-      public void load(ImageView imageView, String url, Function1<? super Boolean, Unit> function1, @NotNull Function2<? super Float, ? super Float, Unit> function2, @NotNull final Function1<? super Boolean, Unit> function11) {
 
-        function1.invoke(false);
+      @Override
+      public void load(ImageView imageView, String url, kotlin.jvm.functions.Function1<? super Boolean, kotlin.Unit> onLoadStart, final kotlin.jvm.functions.Function2<? super Float, ? super Float, kotlin.Unit> onLoadProgress, final kotlin.jvm.functions.Function1<? super Boolean, kotlin.Unit> onLoadEnd) {
+        onLoadStart.invoke(false);
 
         Glide.with(imageView.getContext()).load(url).listener(new RequestListener() {
           @Override
           public boolean onLoadFailed(@Nullable GlideException e, Object model, Target target, boolean isFirstResource) {
-            function11.invoke(false);
+            onLoadEnd.invoke(false);
             return false;
           }
 
           @Override
           public boolean onResourceReady(Object resource, Object model, Target target, DataSource dataSource, boolean isFirstResource) {
-            function11.invoke(true);
+            onLoadEnd.invoke(true);
             return false;
           }
         }).into(imageView);
-
       }
     });
 

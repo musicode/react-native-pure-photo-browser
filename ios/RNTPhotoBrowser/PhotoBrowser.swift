@@ -1,4 +1,6 @@
 
+import Foundation
+
 class PhotoLoader: JXPhotoLoader {
     
     public init() { }
@@ -15,11 +17,27 @@ class PhotoLoader: JXPhotoLoader {
     }
 }
 
+@objc class CompressResult: NSObject {
+    
+    @objc public var path: String
+    
+    @objc public var width: Int
+    
+    @objc public var height: Int
+    
+    @objc public init(path: String, width: Int, height: Int) {
+        self.path = path
+        self.width = width
+        self.height = height
+    }
+    
+}
+
 class Compressor {
     
-    private var maxWidth: CGFloat = 1280
-    private var maxHeight: CGFloat = 1280
-    private var quality: CGFloat = 0.6
+    private var maxWidth: CGFloat = 2000
+    private var maxHeight: CGFloat = 2000
+    private var quality: CGFloat = 0.5
     
     public init() { }
     
@@ -38,10 +56,10 @@ class Compressor {
         return self
     }
     
-    func compress(src: String, dest: String) -> Bool {
+    func compress(src: String, dest: String) -> CompressResult? {
         
         guard var image = UIImage(contentsOfFile: src) else {
-            return false
+            return nil
         }
         
         var width = image.size.width
@@ -92,17 +110,17 @@ class Compressor {
                 image = newImage
             }
             else {
-                return false
+                return nil
             }
         }
         
         if let data = UIImageJPEGRepresentation(image, quality) as NSData? {
             if data.write(toFile: dest, atomically: true) {
-                return true
+                return CompressResult(path: dest, width: Int(width), height: Int(height))
             }
         }
         
-        return false
+        return nil
         
     }
     
@@ -135,7 +153,7 @@ class Compressor {
         
     }
     
-    @objc public static var compress: (String, String) -> Bool = { src, dest in
+    @objc public static var compress: (String, String) -> CompressResult? = { src, dest in
         let compressor = Compressor()
         return compressor.compress(src: src, dest: dest)
     }

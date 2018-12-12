@@ -16,12 +16,14 @@ RCT_EXPORT_METHOD(openBrowser:(int)index list:(NSArray *)list) {
 }
 
 RCT_EXPORT_METHOD(compressImage:(NSString *)src dest:(NSString *)dest callback:(RCTResponseSenderBlock)callback) {
-    BOOL result = PhotoBrowser.compress(src, dest);
-    if (result) {
+    CompressResult *result = PhotoBrowser.compress(src, dest);
+    if (result != nil) {
         callback(@[
                    [NSNull null],
-                    @{
-                       @"path": dest
+                   @{
+                       @"path": result.path,
+                       @"width": [NSNumber numberWithInteger:result.width],
+                       @"height": [NSNumber numberWithInteger:result.height]
                        }
                    ]);
     }
