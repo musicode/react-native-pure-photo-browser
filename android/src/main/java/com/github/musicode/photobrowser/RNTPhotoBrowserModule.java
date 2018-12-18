@@ -11,16 +11,18 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
+import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 import com.github.herokotlin.photobrowser.PhotoBrowser;
 import com.github.herokotlin.photobrowser.PhotoBrowserActivity;
-import com.github.herokotlin.photobrowser.PhotoLoader;
-import com.github.herokotlin.photobrowser.PhotoModel;
+import com.github.herokotlin.photobrowser.PhotoBrowserConfiguration;
+import com.github.herokotlin.photobrowser.model.Photo;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import id.zelory.compressor.Compressor;
 import kotlin.Unit;
@@ -32,15 +34,15 @@ public class RNTPhotoBrowserModule extends ReactContextBaseJavaModule {
   private final ReactApplicationContext reactContext;
 
   public static void setPhotoLoader(final RNTPhotoLoader loader) {
-      PhotoBrowser.loader = new PhotoLoader() {
+      PhotoBrowser.configuration = new PhotoBrowserConfiguration() {
           @Override
-          public void load(@NotNull ImageView imageView, @NotNull String s, @NotNull PhotoModel photoModel, @NotNull Function1<? super Boolean, Unit> function1, @NotNull Function2<? super Float, ? super Float, Unit> function2, @NotNull Function1<? super Boolean, Unit> function11) {
+          public void load(@NotNull ImageView imageView, @NotNull String s, @NotNull Function1<? super Boolean, Unit> function1, @NotNull Function2<? super Float, ? super Float, Unit> function2, @NotNull Function1<? super Boolean, Unit> function11) {
                 loader.load(imageView, s, function1, function2, function11);
           }
 
           @Override
-          public void isLoaded(@NotNull String s, @NotNull Function1<? super Boolean, Unit> function1) {
-              function1.invoke(false);
+          public boolean isLoaded(@NotNull String s) {
+              return false;
           }
       };
   }
@@ -58,16 +60,13 @@ public class RNTPhotoBrowserModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void openBrowser(int index, ReadableArray list) {
 
-    String[] urls = new String[list.size()];
+    ArrayList photos = new ArrayList<Photo>();
 
-    list.toArrayList().toArray(urls);
-
-    String[] rawList = new String[list.size()];
-    for (Integer i = 0; i < rawList.length; i++) {
-      rawList[i] = "";
+    for (int i = 0; i < list.size(); i++) {
+        photos.add(formatPhoto(list.getMap(i)));
     }
 
-    PhotoBrowserActivity.Companion.newInstance(reactContext.getCurrentActivity(), index, urls, urls, rawList);
+    PhotoBrowserActivity.Companion.newInstance(reactContext.getCurrentActivity(), photos, index, "", 30);
   }
 
   @ReactMethod
@@ -106,6 +105,16 @@ public class RNTPhotoBrowserModule extends ReactContextBaseJavaModule {
           }
       }
       callback.invoke("io error");
+  }
+
+  private Photo formatPhoto(ReadableMap data) {
+
+      String thumbnailUrl = data.getString("thumbnailUrl");
+      String highQualityUrl = data.getString("highQualityUrl");
+      String rawUrl = data.getString("rawUrl");
+
+      return new Photo(thumbnailUrl, highQualityUrl, rawUrl, false, false, false, false, 1f);
+
   }
 
 }

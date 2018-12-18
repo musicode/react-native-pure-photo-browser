@@ -1,20 +1,17 @@
 
 import Foundation
 
-class PhotoLoader: JXPhotoLoader {
+class Configuration: PhotoBrowserConfiguration {
     
-    public init() { }
-    
-    public func imageCached(on imageView: UIImageView, url: URL?) -> UIImage? {
-        return nil
+    override func isLoaded(url: String) -> Bool {
+        return false
     }
     
-    public func setImage(on imageView: UIImageView, url: URL?, placeholder: UIImage?, progressBlock: @escaping (Int64, Int64) -> Void, completionHandler: @escaping () -> Void) {
-        guard let url = url?.absoluteString else {
-            return
-        }
-        PhotoBrowser.loadImage(imageView, url, progressBlock, completionHandler)
+    override func load(imageView: UIImageView, url: String, onLoadStart: @escaping (Bool) -> Void, onLoadProgress: @escaping (Int64, Int64) -> Void, onLoadEnd: @escaping (Bool) -> Void) {
+        onLoadStart(true)
+        RNTPhotoBrowser.loadImage(imageView, url, onLoadProgress, onLoadEnd)
     }
+
 }
 
 @objc class CompressResult: NSObject {
@@ -126,29 +123,26 @@ class Compressor {
     
 }
 
-@objc class PhotoBrowser: NSObject {
+func formatPhoto(data: [String: String]) -> Photo {
     
-    @objc public static var loadImage: ((UIImageView, String, (Int64, Int64) -> Void, () -> Void) -> Void)!
+    let thumbnailUrl = data["thumbnailUrl"]!
+    let highQualityUrl = data["highQualityUrl"]!
+    let rawUrl = data["rawUrl"]!
     
-    @objc public static var open: (Int, [String]) -> Void = { index, list in
-        
-        let loader = PhotoLoader()
-        
-        let dataSource = JXNetworkingDataSource(
-            photoLoader: loader,
-            numberOfItems: {
-                return list.count
-            },
-            placeholder: { index -> UIImage? in
-                return nil
-            },
-            autoloadURLString: { index -> String? in
-                return list[index]
-            }
-        )
+    return Photo(thumbnailUrl: thumbnailUrl, highQualityUrl: highQualityUrl, rawUrl: rawUrl)
+    
+}
+
+@objc class RNTPhotoBrowser: NSObject {
+    
+    @objc public static var loadImage: ((UIImageView, String, (Int64, Int64) -> Void, (Bool) -> Void) -> Void)!
+    
+    @objc public static var open: (Int, [[String: String]]) -> Void = { index, list in
         
         DispatchQueue.main.async {
-            JXPhotoBrowser(dataSource: dataSource).show(pageIndex: index)
+            PhotoBrowserController(configuration: Configuration(), indicator: .none, pageMargin: 30).show(photos: list.map {
+                return formatPhoto(data: $0)
+            }, index: index)
         }
         
     }
@@ -157,4 +151,5 @@ class Compressor {
         let compressor = Compressor()
         return compressor.compress(src: src, dest: dest)
     }
+    
 }

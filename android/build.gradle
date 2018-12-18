@@ -37,7 +37,7 @@ repositories {
 
 dependencies {
     implementation 'com.facebook.react:react-native:+'
-    implementation 'com.github.herokotlin:PhotoBrowser:0.0.3'
+    implementation 'com.github.herokotlin:PhotoBrowser:0.0.4'
     implementation 'id.zelory:compressor:2.1.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
