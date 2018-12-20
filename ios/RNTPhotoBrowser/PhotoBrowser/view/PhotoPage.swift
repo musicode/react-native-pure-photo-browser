@@ -148,7 +148,7 @@ class PhotoPage: UICollectionViewCell {
         guard normalSpinner.isHidden else {
             return
         }
-        circleSpinner.value = CGFloat(loaded / total)
+        circleSpinner.value = CGFloat(loaded) / CGFloat(total)
         circleSpinner.setNeedsDisplay()
         
     }
