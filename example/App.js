@@ -25,9 +25,21 @@ export default class App extends Component<Props> {
       <View style={styles.container}>
         <Text style={styles.welcome} onPress={() => {
           RNTPhotoBrowser.openBrowser(1, [
-            "https://img.zcool.cn/community/02404a556d6f8e0000016b627aaf44.jpg",
-            "https://img.zcool.cn/community/02404a556d6f8e0000016b627aaf44.jpg",
-            "https://img.zcool.cn/community/023c6e556d6f8f0000016b6293c428.jpg"
+            {
+              thumbnailUrl: '',
+              highQualityUrl: 'https://img.zcool.cn/community/02404a556d6f8e0000016b627aaf44.jpg',
+              rawUrl: ''
+            },
+            {
+              thumbnailUrl: '',
+              highQualityUrl: 'https://img.zcool.cn/community/02404a556d6f8e0000016b627aaf44.jpg',
+              rawUrl: ''
+            },
+            {
+              thumbnailUrl: '',
+              highQualityUrl: 'https://img.zcool.cn/community/023c6e556d6f8f0000016b6293c428.jpg',
+              rawUrl: ''
+            },
         ])
         }}>Welcome to React Native!</Text>
         <Text style={styles.instructions} onPress={() => {

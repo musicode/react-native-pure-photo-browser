@@ -14,18 +14,12 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-import com.github.musicode.RNTPhotoBrowserModule;
-import com.github.musicode.RNTPhotoBrowserPackage;
-import com.github.musicode.RNTPhotoLoader;
-
-import org.jetbrains.annotations.NotNull;
+import com.github.musicode.photobrowser.RNTPhotoBrowserModule;
+import com.github.musicode.photobrowser.RNTPhotoBrowserPackage;
+import com.github.musicode.photobrowser.RNTPhotoLoader;
 
 import java.util.Arrays;
 import java.util.List;
-
-import kotlin.Unit;
-import kotlin.jvm.functions.Function1;
-import kotlin.jvm.functions.Function2;
 
 public class MainApplication extends Application implements ReactApplication {
 
