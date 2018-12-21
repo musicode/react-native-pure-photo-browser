@@ -24,7 +24,7 @@ export default class App extends Component<Props> {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome} onPress={() => {
-          RNTPhotoBrowser.openBrowser(1, [
+          RNTPhotoBrowser.openBrowser([
             {
               thumbnailUrl: '',
               highQualityUrl: 'https://img.zcool.cn/community/02404a556d6f8e0000016b627aaf44.jpg',
@@ -40,7 +40,7 @@ export default class App extends Component<Props> {
               highQualityUrl: 'https://img.zcool.cn/community/023c6e556d6f8f0000016b6293c428.jpg',
               rawUrl: ''
             },
-        ])
+        ], 1, 'dot', 30)
         }}>Welcome to React Native!</Text>
         <Text style={styles.instructions} onPress={() => {
           RNTPhotoBrowser.compressImage(

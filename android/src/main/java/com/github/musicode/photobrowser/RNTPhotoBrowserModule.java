@@ -58,15 +58,15 @@ public class RNTPhotoBrowserModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void openBrowser(int index, ReadableArray list) {
+  public void openBrowser(ReadableArray list, int index, String indicator, int pageMargin) {
 
-    ArrayList photos = new ArrayList<Photo>();
+    ArrayList<Photo> photos = new ArrayList();
 
     for (int i = 0; i < list.size(); i++) {
         photos.add(formatPhoto(list.getMap(i)));
     }
 
-    PhotoBrowserActivity.Companion.newInstance(reactContext.getCurrentActivity(), photos, index, "", 30);
+    PhotoBrowserActivity.Companion.newInstance(reactContext.getCurrentActivity(), photos, index, indicator, pageMargin);
   }
 
   @ReactMethod

@@ -27,7 +27,8 @@
                                                    launchOptions:launchOptions];
   rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
   
-  [RNTPhotoBrowserModule setLoadImage:^(UIImageView *imageView, NSString *url, void (^ _Nonnull progress)(int64_t, int64_t), void (^ _Nonnull complete)(void)) {
+  [RNTPhotoBrowserModule setImageLoader:^(UIImageView *imageView, NSString *url, void (^onLoadStart)(BOOL), void (^onLoadProgress)(int64_t, int64_t), void (^onLoadEnd)(BOOL)) {
+    onLoadStart(true);
     UIImage *placeholder = [UIImage imageNamed:@"photo_browser_download"];
     if ([url hasPrefix:@"/"]) {
       [imageView sd_setImageWithURL:[NSURL fileURLWithPath:url]
@@ -39,12 +40,12 @@
                             options:SDWebImageCacheMemoryOnly
                            progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
                              dispatch_async(dispatch_get_main_queue(), ^{
-                               progress(receivedSize, expectedSize);
+                               onLoadProgress(receivedSize, expectedSize);
                              });
                            }
                           completed:^(UIImage * _Nullable imageB, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
                             dispatch_async(dispatch_get_main_queue(), ^{
-                              complete();
+                              onLoadEnd(error == nil);
                             });
                           }
               ];

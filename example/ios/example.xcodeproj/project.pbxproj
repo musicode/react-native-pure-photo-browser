@@ -23,8 +23,8 @@
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		5B6ABB8C30508AFF21E84B9F /* libPods-example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 759BA455B55F416907B66E50 /* libPods-example.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		9D34FCC421CD09A300771ACC /* libRNTPhotoBrowser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D34FCC321CD099800771ACC /* libRNTPhotoBrowser.a */; };
 		9D42EB8821BF4FB900CC3487 /* empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D42EB8721BF4FB900CC3487 /* empty.swift */; };
-		9D42EBA421BF507500CC3487 /* libRNTPhotoBrowser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D42EBA321BF506D00CC3487 /* libRNTPhotoBrowser.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 /* End PBXBuildFile section */
 
@@ -281,11 +281,11 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
-		9D42EBA221BF506D00CC3487 /* PBXContainerItemProxy */ = {
+		9D34FCC221CD099800771ACC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 9D42EB9E21BF506D00CC3487 /* RNTPhotoBrowser.xcodeproj */;
+			containerPortal = 9D34FCBE21CD099800771ACC /* RNTPhotoBrowser.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9D42EB9221BF503600CC3487;
+			remoteGlobalIDString = 9D34FC5E21CD026500771ACC;
 			remoteInfo = RNTPhotoBrowser;
 		};
 		ADBDB9261DFEBF0700ED6528 /* PBXContainerItemProxy */ = {
@@ -323,8 +323,8 @@
 		759BA455B55F416907B66E50 /* libPods-example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		9D34FCBE21CD099800771ACC /* RNTPhotoBrowser.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNTPhotoBrowser.xcodeproj; path = "../node_modules/react-native-pure-photo-browser/ios/RNTPhotoBrowser.xcodeproj"; sourceTree = "<group>"; };
 		9D42EB8721BF4FB900CC3487 /* empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = empty.swift; sourceTree = "<group>"; };
-		9D42EB9E21BF506D00CC3487 /* RNTPhotoBrowser.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNTPhotoBrowser.xcodeproj; path = "../node_modules/react-native-pure-photo-browser/ios/RNTPhotoBrowser.xcodeproj"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -333,7 +333,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D42EBA421BF507500CC3487 /* libRNTPhotoBrowser.a in Frameworks */,
+				9D34FCC421CD09A300771ACC /* libRNTPhotoBrowser.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				11D1A2F320CAFA9E000508D9 /* libRCTAnimation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -509,7 +509,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				9D42EB9E21BF506D00CC3487 /* RNTPhotoBrowser.xcodeproj */,
+				9D34FCBE21CD099800771ACC /* RNTPhotoBrowser.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -558,10 +558,10 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		9D42EB9F21BF506D00CC3487 /* Products */ = {
+		9D34FCBF21CD099800771ACC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9D42EBA321BF506D00CC3487 /* libRNTPhotoBrowser.a */,
+				9D34FCC321CD099800771ACC /* libRNTPhotoBrowser.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -607,7 +607,9 @@
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = N276SVAZ33;
 						LastSwiftMigration = 0940;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -672,8 +674,8 @@
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
-					ProductGroup = 9D42EB9F21BF506D00CC3487 /* Products */;
-					ProjectRef = 9D42EB9E21BF506D00CC3487 /* RNTPhotoBrowser.xcodeproj */;
+					ProductGroup = 9D34FCBF21CD099800771ACC /* Products */;
+					ProjectRef = 9D34FCBE21CD099800771ACC /* RNTPhotoBrowser.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -936,11 +938,11 @@
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		9D42EBA321BF506D00CC3487 /* libRNTPhotoBrowser.a */ = {
+		9D34FCC321CD099800771ACC /* libRNTPhotoBrowser.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNTPhotoBrowser.a;
-			remoteRef = 9D42EBA221BF506D00CC3487 /* PBXContainerItemProxy */;
+			remoteRef = 9D34FCC221CD099800771ACC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */ = {
@@ -1031,8 +1033,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = N276SVAZ33;
 				INFOPLIST_FILE = example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1040,8 +1045,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.finstao.test;
 				PRODUCT_NAME = example;
+				PROVISIONING_PROFILE = "8e936239-bddb-424b-b5f8-ee3757eb45c2";
+				PROVISIONING_PROFILE_SPECIFIER = "Finstao Test Ad Hoc";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1054,7 +1061,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N276SVAZ33;
 				INFOPLIST_FILE = example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1062,8 +1072,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.finstao.test;
 				PRODUCT_NAME = example;
+				PROVISIONING_PROFILE = "8e936239-bddb-424b-b5f8-ee3757eb45c2";
+				PROVISIONING_PROFILE_SPECIFIER = "Finstao Test Ad Hoc";
 				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

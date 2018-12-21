@@ -1,5 +1,6 @@
 
 import Foundation
+import UIKit
 
 class Configuration: PhotoBrowserConfiguration {
     
@@ -8,13 +9,12 @@ class Configuration: PhotoBrowserConfiguration {
     }
     
     override func load(imageView: UIImageView, url: String, onLoadStart: @escaping (Bool) -> Void, onLoadProgress: @escaping (Int64, Int64) -> Void, onLoadEnd: @escaping (Bool) -> Void) {
-        onLoadStart(true)
-        RNTPhotoBrowser.loadImage(imageView, url, onLoadProgress, onLoadEnd)
+        RNTPhotoBrowser.loadImage(imageView, url, onLoadStart, onLoadProgress, onLoadEnd)
     }
-
+    
 }
 
-@objc class CompressResult: NSObject {
+@objc public class CompressResult: NSObject {
     
     @objc public var path: String
     
@@ -30,13 +30,11 @@ class Configuration: PhotoBrowserConfiguration {
     
 }
 
-class Compressor {
+@objc public class Compressor: NSObject {
     
     private var maxWidth: CGFloat = 2000
     private var maxHeight: CGFloat = 2000
     private var quality: CGFloat = 0.5
-    
-    public init() { }
     
     func setMaxWidth(_ width: CGFloat) -> Compressor {
         maxWidth = width
@@ -135,14 +133,24 @@ func formatPhoto(data: [String: String]) -> Photo {
 
 @objc class RNTPhotoBrowser: NSObject {
     
-    @objc public static var loadImage: ((UIImageView, String, (Int64, Int64) -> Void, (Bool) -> Void) -> Void)!
+    @objc public static var loadImage: ((UIImageView, String, (Bool) -> Void, (Int64, Int64) -> Void, (Bool) -> Void) -> Void)!
     
-    @objc public static var open: (Int, [[String: String]]) -> Void = { index, list in
+    @objc public static var open: ([[String: String]], Int, String, Int) -> Void = { list, index, indicator, pageMargin in
         
         DispatchQueue.main.async {
-            PhotoBrowserController(configuration: Configuration(), indicator: .none, pageMargin: 30).show(photos: list.map {
+            
+            var indicatorType = PhotoBrowser.IndicatorType.none
+            if indicator == "dot" {
+                indicatorType = .dot
+            }
+            else if indicator == "number" {
+                indicatorType = .number
+            }
+            
+            PhotoBrowserController(configuration: Configuration(), indicator: indicatorType, pageMargin: CGFloat(pageMargin)).show(photos: list.map {
                 return formatPhoto(data: $0)
             }, index: index)
+            
         }
         
     }
