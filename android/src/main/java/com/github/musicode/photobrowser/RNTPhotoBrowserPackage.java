@@ -1,4 +1,3 @@
-
 package com.github.musicode.photobrowser;
 
 import java.util.Arrays;
@@ -27,4 +26,5 @@ public class RNTPhotoBrowserPackage implements ReactPackage {
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
       return Collections.emptyList();
     }
+
 }

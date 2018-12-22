@@ -1,4 +1,3 @@
-
 package com.github.musicode.photobrowser;
 
 import android.graphics.Bitmap;
@@ -31,90 +30,106 @@ import kotlin.jvm.functions.Function2;
 
 public class RNTPhotoBrowserModule extends ReactContextBaseJavaModule {
 
-  private final ReactApplicationContext reactContext;
+    private final ReactApplicationContext reactContext;
 
-  public static void setPhotoLoader(final RNTPhotoLoader loader) {
-      PhotoBrowser.configuration = new PhotoBrowserConfiguration() {
-          @Override
-          public void load(@NotNull ImageView imageView, @NotNull String s, @NotNull Function1<? super Boolean, Unit> function1, @NotNull Function2<? super Float, ? super Float, Unit> function2, @NotNull Function1<? super Boolean, Unit> function11) {
-                loader.load(imageView, s, function1, function2, function11);
-          }
+    public static void setPhotoLoader(final RNTPhotoLoader loader) {
+        PhotoBrowser.configuration = new PhotoBrowserConfiguration() {
+            @Override
+            public void load(@NotNull ImageView imageView, @NotNull String s, final @NotNull Function1<? super Boolean, Unit> function1, final @NotNull Function2<? super Float, ? super Float, Unit> function2, final @NotNull Function1<? super Boolean, Unit> function11) {
+                loader.load(imageView, s, new RNTPhotoListenr() {
+                    @Override
+                    public void onLoadStart(boolean hasProgress) {
+                        function1.invoke(hasProgress);
+                    }
 
-          @Override
-          public boolean isLoaded(@NotNull String s) {
-              return false;
-          }
-      };
-  }
+                    @Override
+                    public void onLoadProgress(float loaded, float total) {
+                        function2.invoke(loaded, total);
+                    }
 
-  public RNTPhotoBrowserModule(ReactApplicationContext reactContext) {
-    super(reactContext);
-    this.reactContext = reactContext;
-  }
+                    @Override
+                    public void onLoadEnd(boolean success) {
+                        function11.invoke(success);
+                    }
+                });
+            }
 
-  @Override
-  public String getName() {
-    return "RNTPhotoBrowser";
-  }
-
-  @ReactMethod
-  public void openBrowser(ReadableArray list, int index, String indicator, int pageMargin) {
-
-    ArrayList<Photo> photos = new ArrayList();
-
-    for (int i = 0; i < list.size(); i++) {
-        photos.add(formatPhoto(list.getMap(i)));
+            @Override
+            public boolean isLoaded(@NotNull String s) {
+                return loader.isLoaded(s);
+            }
+        };
     }
 
-    PhotoBrowserActivity.Companion.newInstance(reactContext.getCurrentActivity(), photos, index, indicator, pageMargin);
-  }
+    public RNTPhotoBrowserModule(ReactApplicationContext reactContext) {
+        super(reactContext);
+        this.reactContext = reactContext;
+    }
 
-  @ReactMethod
-  public void compressImage(String src, String dest, Callback callback) {
-      File file = new File(src);
-      if (file.exists()) {
-          try {
-              File destFile = new File(dest);
+    @Override
+    public String getName() {
+        return "RNTPhotoBrowser";
+    }
 
-              File result = new Compressor(reactContext)
-                      .setMaxWidth(2000)
-                      .setMaxHeight(2000)
-                      .setQuality(50)
-                      .setCompressFormat(Bitmap.CompressFormat.JPEG)
-                      .setDestinationDirectoryPath(destFile.getParent())
-                      .compressToFile(file, destFile.getName());
+    @ReactMethod
+    public void openBrowser(ReadableArray list, int index, String indicator, int pageMargin) {
 
-              if (result.exists()) {
-                  String path = result.getAbsolutePath();
+        ArrayList<Photo> photos = new ArrayList<Photo>();
 
-                  BitmapFactory.Options options = new BitmapFactory.Options();
-                  options.inJustDecodeBounds = true;
-                  BitmapFactory.decodeFile(path, options);
+        for (int i = 0; i < list.size(); i++) {
+            photos.add(formatPhoto(list.getMap(i)));
+        }
 
-                  WritableMap map = Arguments.createMap();
-                  map.putString("path", path);
-                  map.putInt("width", options.outWidth);
-                  map.putInt("height", options.outHeight);
+        PhotoBrowserActivity.Companion.newInstance(reactContext.getCurrentActivity(), photos, index, indicator, pageMargin);
 
-                  callback.invoke(null, map);
-                  return;
-              }
-          }
-          catch (IOException e) {
+    }
 
-          }
-      }
-      callback.invoke("io error");
-  }
+    @ReactMethod
+    public void compressImage(String src, String dest, Callback callback) {
+        File file = new File(src);
+        if (file.exists()) {
+            try {
+                File destFile = new File(dest);
 
-  private Photo formatPhoto(ReadableMap data) {
+                File result = new Compressor(reactContext)
+                        .setMaxWidth(2000)
+                        .setMaxHeight(2000)
+                        .setQuality(50)
+                        .setCompressFormat(Bitmap.CompressFormat.JPEG)
+                        .setDestinationDirectoryPath(destFile.getParent())
+                        .compressToFile(file, destFile.getName());
 
-      String thumbnailUrl = data.getString("thumbnailUrl");
-      String highQualityUrl = data.getString("highQualityUrl");
-      String rawUrl = data.getString("rawUrl");
+                if (result.exists()) {
+                    String path = result.getAbsolutePath();
 
-      return new Photo(thumbnailUrl, highQualityUrl, rawUrl, false, false, false, false, 1f);
+                    BitmapFactory.Options options = new BitmapFactory.Options();
+                    options.inJustDecodeBounds = true;
+                    BitmapFactory.decodeFile(path, options);
 
-  }
+                    WritableMap map = Arguments.createMap();
+                    map.putString("path", path);
+                    map.putInt("width", options.outWidth);
+                    map.putInt("height", options.outHeight);
+
+                    callback.invoke(null, map);
+                    return;
+                }
+            }
+            catch (IOException e) {
+
+            }
+        }
+        callback.invoke("io error");
+    }
+
+    private Photo formatPhoto(ReadableMap data) {
+
+        String thumbnailUrl = data.getString("thumbnailUrl");
+        String highQualityUrl = data.getString("highQualityUrl");
+        String rawUrl = data.getString("rawUrl");
+
+        return new Photo(thumbnailUrl, highQualityUrl, rawUrl, false, false, false, false, 1f);
+
+    }
 
 }

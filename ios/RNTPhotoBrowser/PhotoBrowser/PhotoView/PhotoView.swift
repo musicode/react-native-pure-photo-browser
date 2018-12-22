@@ -12,6 +12,9 @@ public class PhotoView: UIView {
     
     private lazy var scrollView: UIScrollView = {
         let view = UIScrollView()
+        if #available(iOS 11.0, *) {
+            view.contentInsetAdjustmentBehavior = .never
+        }
         view.alwaysBounceVertical = true
         view.alwaysBounceHorizontal = true
         view.showsVerticalScrollIndicator = false
