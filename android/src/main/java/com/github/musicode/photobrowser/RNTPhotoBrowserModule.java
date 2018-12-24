@@ -32,7 +32,11 @@ public class RNTPhotoBrowserModule extends ReactContextBaseJavaModule {
 
     private final ReactApplicationContext reactContext;
 
+    static RNTPhotoLoader photoLoader;
+
     public static void setPhotoLoader(final RNTPhotoLoader loader) {
+        photoLoader = loader;
+
         PhotoBrowser.configuration = new PhotoBrowserConfiguration() {
             @Override
             public void load(@NotNull ImageView imageView, @NotNull String s, final @NotNull Function1<? super Boolean, Unit> function1, final @NotNull Function2<? super Float, ? super Float, Unit> function2, final @NotNull Function1<? super Boolean, Unit> function11) {

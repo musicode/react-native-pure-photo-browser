@@ -8,10 +8,10 @@ public class CircleSpinner: UIView {
     public var value: CGFloat = 0
     
     // 圆形的颜色
-    public var color = UIColor(red: 255, green: 255, blue: 255, alpha: 0.6)
+    public var color = UIColor(red: 255, green: 255, blue: 255, alpha: 0.75)
     
     // 圆形的半径
-    public var radius: CGFloat = 24 {
+    public var radius: CGFloat = 20 {
         didSet {
             invalidateIntrinsicContentSize()
         }
@@ -33,7 +33,8 @@ public class CircleSpinner: UIView {
     }
     
     public required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
+        backgroundColor = .clear
     }
     
     public override func draw(_ rect: CGRect) {

@@ -59,7 +59,8 @@ public class DotIndicator: UIView {
     }
     
     public required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
+        backgroundColor = .clear
     }
 
     public override func draw(_ rect: CGRect) {
@@ -72,7 +73,7 @@ public class DotIndicator: UIView {
             return
         }
         
-        let centerY = Double(frame.height / 2)
+        let centerY = Double(bounds.midY)
         
         var startX = (Double(frame.width) - contentWidth) / 2
         var dotIndex = 0

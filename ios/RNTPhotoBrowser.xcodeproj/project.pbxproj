@@ -9,18 +9,20 @@
 /* Begin PBXBuildFile section */
 		9D34FC6321CD026500771ACC /* RNTPhotoBrowserModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D34FC6221CD026500771ACC /* RNTPhotoBrowserModule.m */; };
 		9D34FC6421CD026500771ACC /* RNTPhotoBrowserModule.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D34FC6121CD026500771ACC /* RNTPhotoBrowserModule.h */; };
-		9D34FC7E21CD02FD00771ACC /* NumberIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D34FC6C21CD02FD00771ACC /* NumberIndicator.swift */; };
-		9D34FC7F21CD02FD00771ACC /* SimpleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D34FC6E21CD02FD00771ACC /* SimpleButton.swift */; };
-		9D34FC8021CD02FD00771ACC /* PhotoBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D34FC6F21CD02FD00771ACC /* PhotoBrowser.swift */; };
-		9D34FC8121CD02FD00771ACC /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D34FC7121CD02FD00771ACC /* PhotoView.swift */; };
-		9D34FC8221CD02FD00771ACC /* PhotoBrowserConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D34FC7221CD02FD00771ACC /* PhotoBrowserConfiguration.swift */; };
-		9D34FC8321CD02FD00771ACC /* PhotoBrowserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D34FC7321CD02FD00771ACC /* PhotoBrowserController.swift */; };
-		9D34FC8421CD02FD00771ACC /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D34FC7521CD02FD00771ACC /* Photo.swift */; };
-		9D34FC8521CD02FD00771ACC /* PhotoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D34FC7721CD02FD00771ACC /* PhotoPage.swift */; };
-		9D34FC8621CD02FD00771ACC /* CircleSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D34FC7921CD02FD00771ACC /* CircleSpinner.swift */; };
-		9D34FC8721CD02FD00771ACC /* PhotoBrowserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D34FC7A21CD02FD00771ACC /* PhotoBrowserDelegate.swift */; };
-		9D34FC8821CD02FD00771ACC /* DotIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D34FC7D21CD02FD00771ACC /* DotIndicator.swift */; };
 		9D34FC8A21CD036300771ACC /* RNTPhotoBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D34FC8921CD036300771ACC /* RNTPhotoBrowser.swift */; };
+		9D3898F521D0CC3900B4FECB /* RNTThumbnailViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D3898F421D0CC3900B4FECB /* RNTThumbnailViewManager.m */; };
+		9D3898F821D0F75200B4FECB /* RNTThumbnailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D3898F721D0F75200B4FECB /* RNTThumbnailView.m */; };
+		9D38994421D1121D00B4FECB /* NumberIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D38993221D1121D00B4FECB /* NumberIndicator.swift */; };
+		9D38994521D1121D00B4FECB /* SimpleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D38993421D1121D00B4FECB /* SimpleButton.swift */; };
+		9D38994621D1121D00B4FECB /* PhotoBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D38993521D1121D00B4FECB /* PhotoBrowser.swift */; };
+		9D38994721D1121D00B4FECB /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D38993721D1121D00B4FECB /* PhotoView.swift */; };
+		9D38994821D1121D00B4FECB /* PhotoBrowserConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D38993821D1121D00B4FECB /* PhotoBrowserConfiguration.swift */; };
+		9D38994921D1121D00B4FECB /* PhotoBrowserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D38993921D1121D00B4FECB /* PhotoBrowserController.swift */; };
+		9D38994A21D1121D00B4FECB /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D38993B21D1121D00B4FECB /* Photo.swift */; };
+		9D38994B21D1121D00B4FECB /* PhotoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D38993D21D1121D00B4FECB /* PhotoPage.swift */; };
+		9D38994C21D1121D00B4FECB /* CircleSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D38993F21D1121D00B4FECB /* CircleSpinner.swift */; };
+		9D38994D21D1121D00B4FECB /* PhotoBrowserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D38994021D1121D00B4FECB /* PhotoBrowserDelegate.swift */; };
+		9D38994E21D1121D00B4FECB /* DotIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D38994321D1121D00B4FECB /* DotIndicator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,19 +42,23 @@
 		9D34FC5E21CD026500771ACC /* libRNTPhotoBrowser.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNTPhotoBrowser.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D34FC6121CD026500771ACC /* RNTPhotoBrowserModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNTPhotoBrowserModule.h; sourceTree = "<group>"; };
 		9D34FC6221CD026500771ACC /* RNTPhotoBrowserModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNTPhotoBrowserModule.m; sourceTree = "<group>"; };
-		9D34FC6C21CD02FD00771ACC /* NumberIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberIndicator.swift; sourceTree = "<group>"; };
-		9D34FC6E21CD02FD00771ACC /* SimpleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleButton.swift; sourceTree = "<group>"; };
-		9D34FC6F21CD02FD00771ACC /* PhotoBrowser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoBrowser.swift; sourceTree = "<group>"; };
-		9D34FC7121CD02FD00771ACC /* PhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
-		9D34FC7221CD02FD00771ACC /* PhotoBrowserConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoBrowserConfiguration.swift; sourceTree = "<group>"; };
-		9D34FC7321CD02FD00771ACC /* PhotoBrowserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoBrowserController.swift; sourceTree = "<group>"; };
-		9D34FC7521CD02FD00771ACC /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
-		9D34FC7721CD02FD00771ACC /* PhotoPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPage.swift; sourceTree = "<group>"; };
-		9D34FC7921CD02FD00771ACC /* CircleSpinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleSpinner.swift; sourceTree = "<group>"; };
-		9D34FC7A21CD02FD00771ACC /* PhotoBrowserDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoBrowserDelegate.swift; sourceTree = "<group>"; };
-		9D34FC7D21CD02FD00771ACC /* DotIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotIndicator.swift; sourceTree = "<group>"; };
 		9D34FC8921CD036300771ACC /* RNTPhotoBrowser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNTPhotoBrowser.swift; sourceTree = "<group>"; };
 		9D34FC9821CD062900771ACC /* RNTPhotoBrowser-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RNTPhotoBrowser-Bridging-Header.h"; sourceTree = "<group>"; };
+		9D3898F321D0CC3900B4FECB /* RNTThumbnailViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNTThumbnailViewManager.h; sourceTree = "<group>"; };
+		9D3898F421D0CC3900B4FECB /* RNTThumbnailViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNTThumbnailViewManager.m; sourceTree = "<group>"; };
+		9D3898F621D0F75200B4FECB /* RNTThumbnailView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNTThumbnailView.h; sourceTree = "<group>"; };
+		9D3898F721D0F75200B4FECB /* RNTThumbnailView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNTThumbnailView.m; sourceTree = "<group>"; };
+		9D38993221D1121D00B4FECB /* NumberIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberIndicator.swift; sourceTree = "<group>"; };
+		9D38993421D1121D00B4FECB /* SimpleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleButton.swift; sourceTree = "<group>"; };
+		9D38993521D1121D00B4FECB /* PhotoBrowser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoBrowser.swift; sourceTree = "<group>"; };
+		9D38993721D1121D00B4FECB /* PhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
+		9D38993821D1121D00B4FECB /* PhotoBrowserConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoBrowserConfiguration.swift; sourceTree = "<group>"; };
+		9D38993921D1121D00B4FECB /* PhotoBrowserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoBrowserController.swift; sourceTree = "<group>"; };
+		9D38993B21D1121D00B4FECB /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		9D38993D21D1121D00B4FECB /* PhotoPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPage.swift; sourceTree = "<group>"; };
+		9D38993F21D1121D00B4FECB /* CircleSpinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleSpinner.swift; sourceTree = "<group>"; };
+		9D38994021D1121D00B4FECB /* PhotoBrowserDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoBrowserDelegate.swift; sourceTree = "<group>"; };
+		9D38994321D1121D00B4FECB /* DotIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotIndicator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,85 +91,89 @@
 		9D34FC6021CD026500771ACC /* RNTPhotoBrowser */ = {
 			isa = PBXGroup;
 			children = (
-				9D34FC6A21CD02FD00771ACC /* PhotoBrowser */,
+				9D38993021D1121D00B4FECB /* PhotoBrowser */,
 				9D34FC6121CD026500771ACC /* RNTPhotoBrowserModule.h */,
 				9D34FC6221CD026500771ACC /* RNTPhotoBrowserModule.m */,
 				9D34FC8921CD036300771ACC /* RNTPhotoBrowser.swift */,
 				9D34FC9821CD062900771ACC /* RNTPhotoBrowser-Bridging-Header.h */,
+				9D3898F321D0CC3900B4FECB /* RNTThumbnailViewManager.h */,
+				9D3898F421D0CC3900B4FECB /* RNTThumbnailViewManager.m */,
+				9D3898F621D0F75200B4FECB /* RNTThumbnailView.h */,
+				9D3898F721D0F75200B4FECB /* RNTThumbnailView.m */,
 			);
 			path = RNTPhotoBrowser;
 			sourceTree = "<group>";
 		};
-		9D34FC6A21CD02FD00771ACC /* PhotoBrowser */ = {
+		9D38993021D1121D00B4FECB /* PhotoBrowser */ = {
 			isa = PBXGroup;
 			children = (
-				9D34FC6B21CD02FD00771ACC /* NumberIndicator */,
-				9D34FC6D21CD02FD00771ACC /* SimpleButton */,
-				9D34FC6F21CD02FD00771ACC /* PhotoBrowser.swift */,
-				9D34FC7021CD02FD00771ACC /* PhotoView */,
-				9D34FC7221CD02FD00771ACC /* PhotoBrowserConfiguration.swift */,
-				9D34FC7321CD02FD00771ACC /* PhotoBrowserController.swift */,
-				9D34FC7421CD02FD00771ACC /* model */,
-				9D34FC7621CD02FD00771ACC /* view */,
-				9D34FC7821CD02FD00771ACC /* CircleSpinner */,
-				9D34FC7A21CD02FD00771ACC /* PhotoBrowserDelegate.swift */,
-				9D34FC7C21CD02FD00771ACC /* DotIndicator */,
+				9D38993121D1121D00B4FECB /* NumberIndicator */,
+				9D38993321D1121D00B4FECB /* SimpleButton */,
+				9D38993521D1121D00B4FECB /* PhotoBrowser.swift */,
+				9D38993621D1121D00B4FECB /* PhotoView */,
+				9D38993821D1121D00B4FECB /* PhotoBrowserConfiguration.swift */,
+				9D38993921D1121D00B4FECB /* PhotoBrowserController.swift */,
+				9D38993A21D1121D00B4FECB /* model */,
+				9D38993C21D1121D00B4FECB /* view */,
+				9D38993E21D1121D00B4FECB /* CircleSpinner */,
+				9D38994021D1121D00B4FECB /* PhotoBrowserDelegate.swift */,
+				9D38994221D1121D00B4FECB /* DotIndicator */,
 			);
 			path = PhotoBrowser;
 			sourceTree = "<group>";
 		};
-		9D34FC6B21CD02FD00771ACC /* NumberIndicator */ = {
+		9D38993121D1121D00B4FECB /* NumberIndicator */ = {
 			isa = PBXGroup;
 			children = (
-				9D34FC6C21CD02FD00771ACC /* NumberIndicator.swift */,
+				9D38993221D1121D00B4FECB /* NumberIndicator.swift */,
 			);
 			path = NumberIndicator;
 			sourceTree = "<group>";
 		};
-		9D34FC6D21CD02FD00771ACC /* SimpleButton */ = {
+		9D38993321D1121D00B4FECB /* SimpleButton */ = {
 			isa = PBXGroup;
 			children = (
-				9D34FC6E21CD02FD00771ACC /* SimpleButton.swift */,
+				9D38993421D1121D00B4FECB /* SimpleButton.swift */,
 			);
 			path = SimpleButton;
 			sourceTree = "<group>";
 		};
-		9D34FC7021CD02FD00771ACC /* PhotoView */ = {
+		9D38993621D1121D00B4FECB /* PhotoView */ = {
 			isa = PBXGroup;
 			children = (
-				9D34FC7121CD02FD00771ACC /* PhotoView.swift */,
+				9D38993721D1121D00B4FECB /* PhotoView.swift */,
 			);
 			path = PhotoView;
 			sourceTree = "<group>";
 		};
-		9D34FC7421CD02FD00771ACC /* model */ = {
+		9D38993A21D1121D00B4FECB /* model */ = {
 			isa = PBXGroup;
 			children = (
-				9D34FC7521CD02FD00771ACC /* Photo.swift */,
+				9D38993B21D1121D00B4FECB /* Photo.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
 		};
-		9D34FC7621CD02FD00771ACC /* view */ = {
+		9D38993C21D1121D00B4FECB /* view */ = {
 			isa = PBXGroup;
 			children = (
-				9D34FC7721CD02FD00771ACC /* PhotoPage.swift */,
+				9D38993D21D1121D00B4FECB /* PhotoPage.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
 		};
-		9D34FC7821CD02FD00771ACC /* CircleSpinner */ = {
+		9D38993E21D1121D00B4FECB /* CircleSpinner */ = {
 			isa = PBXGroup;
 			children = (
-				9D34FC7921CD02FD00771ACC /* CircleSpinner.swift */,
+				9D38993F21D1121D00B4FECB /* CircleSpinner.swift */,
 			);
 			path = CircleSpinner;
 			sourceTree = "<group>";
 		};
-		9D34FC7C21CD02FD00771ACC /* DotIndicator */ = {
+		9D38994221D1121D00B4FECB /* DotIndicator */ = {
 			isa = PBXGroup;
 			children = (
-				9D34FC7D21CD02FD00771ACC /* DotIndicator.swift */,
+				9D38994321D1121D00B4FECB /* DotIndicator.swift */,
 			);
 			path = DotIndicator;
 			sourceTree = "<group>";
@@ -224,19 +234,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D34FC8421CD02FD00771ACC /* Photo.swift in Sources */,
-				9D34FC8521CD02FD00771ACC /* PhotoPage.swift in Sources */,
-				9D34FC7E21CD02FD00771ACC /* NumberIndicator.swift in Sources */,
+				9D3898F821D0F75200B4FECB /* RNTThumbnailView.m in Sources */,
+				9D38994B21D1121D00B4FECB /* PhotoPage.swift in Sources */,
+				9D38994821D1121D00B4FECB /* PhotoBrowserConfiguration.swift in Sources */,
+				9D3898F521D0CC3900B4FECB /* RNTThumbnailViewManager.m in Sources */,
 				9D34FC6321CD026500771ACC /* RNTPhotoBrowserModule.m in Sources */,
-				9D34FC7F21CD02FD00771ACC /* SimpleButton.swift in Sources */,
-				9D34FC8821CD02FD00771ACC /* DotIndicator.swift in Sources */,
-				9D34FC8321CD02FD00771ACC /* PhotoBrowserController.swift in Sources */,
-				9D34FC8121CD02FD00771ACC /* PhotoView.swift in Sources */,
+				9D38994621D1121D00B4FECB /* PhotoBrowser.swift in Sources */,
+				9D38994421D1121D00B4FECB /* NumberIndicator.swift in Sources */,
+				9D38994C21D1121D00B4FECB /* CircleSpinner.swift in Sources */,
+				9D38994D21D1121D00B4FECB /* PhotoBrowserDelegate.swift in Sources */,
 				9D34FC8A21CD036300771ACC /* RNTPhotoBrowser.swift in Sources */,
-				9D34FC8721CD02FD00771ACC /* PhotoBrowserDelegate.swift in Sources */,
-				9D34FC8621CD02FD00771ACC /* CircleSpinner.swift in Sources */,
-				9D34FC8221CD02FD00771ACC /* PhotoBrowserConfiguration.swift in Sources */,
-				9D34FC8021CD02FD00771ACC /* PhotoBrowser.swift in Sources */,
+				9D38994A21D1121D00B4FECB /* Photo.swift in Sources */,
+				9D38994E21D1121D00B4FECB /* DotIndicator.swift in Sources */,
+				9D38994921D1121D00B4FECB /* PhotoBrowserController.swift in Sources */,
+				9D38994521D1121D00B4FECB /* SimpleButton.swift in Sources */,
+				9D38994721D1121D00B4FECB /* PhotoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
