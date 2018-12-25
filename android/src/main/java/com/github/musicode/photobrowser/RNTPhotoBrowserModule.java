@@ -65,8 +65,8 @@ public class RNTPhotoBrowserModule extends ReactContextBaseJavaModule {
             }
 
             @Override
-            public Bitmap getBitmap(@NotNull Drawable d) {
-                return loader.getBitmap(d);
+            public boolean save(@NotNull String s, @NotNull Drawable drawable) {
+                return loader.save(s, drawable);
             }
         };
     }
