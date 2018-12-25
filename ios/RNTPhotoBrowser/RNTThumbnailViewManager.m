@@ -19,6 +19,11 @@ RCT_CUSTOM_VIEW_PROPERTY(uri, NSString, RNTThumbnailView) {
 RCT_CUSTOM_VIEW_PROPERTY(borderRadius, int, RNTThumbnailView) {
     int value = [RCTConvert int:json];
     view.imageView.layer.cornerRadius = value;
+    if (value > 0) {
+        view.imageView.clipsToBounds = YES;
+    } else {
+        view.imageView.clipsToBounds = NO;
+    }
 }
 
 RCT_EXPORT_VIEW_PROPERTY(onThumbnailLoadStart, RCTBubblingEventBlock);

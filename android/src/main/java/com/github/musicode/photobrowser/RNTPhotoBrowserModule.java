@@ -3,6 +3,7 @@ package com.github.musicode.photobrowser;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.widget.ImageView;
+import android.graphics.drawable.Drawable;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Callback;
@@ -61,6 +62,11 @@ public class RNTPhotoBrowserModule extends ReactContextBaseJavaModule {
             @Override
             public boolean isLoaded(@NotNull String s) {
                 return loader.isLoaded(s);
+            }
+
+            @Override
+            public Bitmap getBitmap(@NotNull Drawable d) {
+                return loader.getBitmap(d);
             }
         };
     }

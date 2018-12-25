@@ -9,7 +9,6 @@
     if (self) {
         UIImageView* view = [UIImageView new];
         view.contentMode = UIViewContentModeScaleAspectFill;
-        view.clipsToBounds = YES;
         [self addSubview:view];
         view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _imageView = view;
