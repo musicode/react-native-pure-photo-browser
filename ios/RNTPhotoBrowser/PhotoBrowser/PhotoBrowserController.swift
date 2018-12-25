@@ -70,7 +70,7 @@ public class PhotoBrowserController: UIViewController {
         tipLabel.textAlignment = .center
         tipLabel.isHidden = true
         tipLabel.textColor = .white
-        tipLabel.font = UIFont.systemFont(ofSize: 12)
+        tipLabel.font = UIFont.systemFont(ofSize: 15)
         tipLabel.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(tipLabel)
@@ -78,8 +78,8 @@ public class PhotoBrowserController: UIViewController {
         view.addConstraints([
             NSLayoutConstraint(item: tipLabel, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: tipLabel, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: tipLabel, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1, constant: 80),
-            NSLayoutConstraint(item: tipLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: 30)
+            NSLayoutConstraint(item: tipLabel, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1, constant: 120),
+            NSLayoutConstraint(item: tipLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: 50)
         ])
         
     }
