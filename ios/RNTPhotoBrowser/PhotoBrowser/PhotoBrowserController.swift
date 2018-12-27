@@ -30,6 +30,8 @@ public class PhotoBrowserController: UIViewController {
     public func show(photos: [Photo], index: Int) {
         self.index = index
         self.photos = photos
+        self.modalPresentationStyle = .custom
+        self.modalTransitionStyle = .crossDissolve
         UIApplication.shared.keyWindow?.rootViewController?.present(self, animated: true, completion: nil)
     }
     

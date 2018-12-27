@@ -1,5 +1,7 @@
 package com.github.musicode.photobrowser;
 
+import android.graphics.Color;
+
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
@@ -29,7 +31,9 @@ public class RNTThumbnailViewManager extends SimpleViewManager<ThumbnailView> {
 
     @Override
     protected ThumbnailView createViewInstance(ThemedReactContext reactContext) {
-        return new ThumbnailView(reactContext);
+        ThumbnailView view = new ThumbnailView(reactContext);
+        view.setBgColor(Color.parseColor("#EBEBEB"));
+        return view;
     }
 
     @ReactProp(name = "uri")

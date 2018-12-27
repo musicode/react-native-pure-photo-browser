@@ -4,9 +4,16 @@
 
 @implementation RNTPhotoBrowserModule
 
-+ (void)setImageLoader:(void (^ _Null_unspecified)(UIImageView * _Nonnull, NSString * _Nonnull, void (^ _Nonnull)(BOOL), void (^ _Nonnull)(int64_t, int64_t), void (^ _Nonnull)(BOOL)))value
-{
-    RNTPhotoBrowser.loadImage = value;
++ (void)setImageLoader:(void (^ _Null_unspecified)(UIImageView * _Nonnull, NSString * _Nonnull, NSInteger, NSInteger, void (^ _Nonnull)(BOOL), void (^ _Nonnull)(NSInteger, NSInteger), void (^ _Nonnull)(UIImage*)))value {
+    RNTPhotoBrowser.loadPhoto = value;
+}
+
++ (void)setImageIsLoaded:(BOOL (^)(NSString *))value {
+    RNTPhotoBrowser.isPhotoLoaded = value;
+}
+
++ (void)setImageCachePath:(NSString* (^ _Null_unspecified)(NSString *))value {
+    RNTPhotoBrowser.getPhotoCachePath = value;
 }
 
 RCT_EXPORT_MODULE(RNTPhotoBrowser);

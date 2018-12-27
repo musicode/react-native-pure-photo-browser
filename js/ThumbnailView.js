@@ -13,6 +13,8 @@ class ThumbnailView extends Component {
 
   static propTypes = {
     uri: PropTypes.string.isRequired,
+    width: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired,
     borderRadius: PropTypes.number,
     style: ViewPropTypes.style,
 
@@ -43,9 +45,34 @@ class ThumbnailView extends Component {
   }
 
   render() {
+
+    let {
+      uri,
+      width,
+      height,
+      borderRadius,
+      style,
+    } = this.props
+
+    let props = { uri, width, height }
+
+    if (borderRadius != null) {
+      props.borderRadius = borderRadius
+    }
+
+    if (style != null) {
+      props.style = [
+        style,
+        { width, height }
+      ]
+    }
+    else {
+      props.style = { width, height }
+    }
+
     return (
       <RNTThumbnailView
-        {...this.props}
+        {...props}
         onThumbnailLoadStart={this.handleLoadStart}
         onThumbnailLoadProgress={this.handleLoadProgress}
         onThumbnailLoadEnd={this.handleLoadEnd}

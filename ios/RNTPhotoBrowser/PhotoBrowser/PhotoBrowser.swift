@@ -108,7 +108,25 @@ public class PhotoBrowser: UIView {
         
         view.onClick = {
             self.saveButton.isHidden = true
-            self.getCurrentPage().savePhoto()
+        
+            let currentPage = self.getCurrentPage()
+            guard let photo = currentPage.photo else {
+                return
+            }
+            
+            self.configuration.save(
+                url: currentPage.loadedUrl,
+                image: currentPage.photoView.imageView.image!,
+                complete: { success in
+                    DispatchQueue.main.async {
+                        if !success {
+                            self.saveButton.isHidden = false
+                        }
+                        self.delegate.photoBrowserDidSave(photo: photo, success: success)
+                    }
+                }
+            )
+
         }
         
         addSubview(view)
@@ -229,12 +247,6 @@ extension PhotoBrowser: UICollectionViewDataSource {
         }
         cell.onLongPress = { photo in
             self.delegate.photoBrowserDidLongPress(photo: photo)
-        }
-        cell.onSave = { photo, success in
-            if !success {
-                self.saveButton.isHidden = false
-            }
-            self.delegate.photoBrowserDidSave(photo: photo, success: success)
         }
         cell.update(photo: photos[indexPath.item], configuration: configuration)
         return cell

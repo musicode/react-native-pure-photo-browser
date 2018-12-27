@@ -17,9 +17,7 @@ class PhotoPage: UICollectionViewCell {
     
     var onDragEnd: ((Photo) -> Void)?
     
-    var onSave: ((Photo, Bool) -> Void)?
-
-    private lazy var photoView: PhotoView = {
+    lazy var photoView: PhotoView = {
         let view = PhotoView()
         view.onTap = {
             self.onTap?(self.photo)
@@ -74,9 +72,9 @@ class PhotoPage: UICollectionViewCell {
         return view
     }()
     
-    private var photo: Photo!
+    var photo: Photo!
     
-    private var loadedUrl = ""
+    var loadedUrl = ""
     
     private var hasRawUrl: Bool {
         get {
@@ -99,10 +97,6 @@ class PhotoPage: UICollectionViewCell {
         }
         
     }
-    
-    func savePhoto() {
-        UIImageWriteToSavedPhotosAlbum(photoView.imageView.image!, self, #selector(onSaveEnd), nil)
-    }
 
     func loadRawPhoto(configuration: PhotoBrowserConfiguration) {
         loadPhoto(url: photo.rawUrl, configuration: configuration)
@@ -117,8 +111,8 @@ class PhotoPage: UICollectionViewCell {
                 self.onLoadStart(url: url, hasProgress: hasProgress)
             }, onLoadProgress: { loaded, total in
                 self.onLoadProgress(loaded: loaded, total: total)
-            }, onLoadEnd: { success in
-                self.onLoadEnd(url: url, success: success)
+            }, onLoadEnd: { image in
+                self.onLoadEnd(url: url, image: image)
             }
         )
         
@@ -143,7 +137,7 @@ class PhotoPage: UICollectionViewCell {
         
     }
     
-    private func onLoadProgress(loaded: Int64, total: Int64) {
+    private func onLoadProgress(loaded: Int, total: Int) {
         
         guard normalSpinner.isHidden else {
             return
@@ -153,8 +147,8 @@ class PhotoPage: UICollectionViewCell {
         
     }
     
-    private func onLoadEnd(url: String, success: Bool) {
-        
+    private func onLoadEnd(url: String, image: UIImage?) {
+
         if circleSpinner.isHidden {
             normalSpinner.stopAnimating()
             normalSpinner.isHidden = true
@@ -163,7 +157,9 @@ class PhotoPage: UICollectionViewCell {
             circleSpinner.isHidden = true
         }
         
-        if success {
+        photoView.imageView.image = image
+        
+        if image != nil {
             if hasRawUrl {
                 if url == photo.highQualityUrl {
                     photo.isRawButtonVisible = true
@@ -184,8 +180,4 @@ class PhotoPage: UICollectionViewCell {
         
     }
     
-    @objc private func onSaveEnd(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: AnyObject) {
-        onSave?(photo, error == nil)
-    }
-
 }

@@ -59,12 +59,16 @@ open class PhotoBrowserConfiguration {
     
     public init() { }
     
-    open func load(imageView: UIImageView, url: String, onLoadStart: @escaping (Bool) -> Void, onLoadProgress: @escaping (Int64, Int64) -> Void, onLoadEnd: @escaping (Bool) -> Void) {
+    open func load(imageView: UIImageView, url: String, onLoadStart: @escaping (Bool) -> Void, onLoadProgress: @escaping (Int, Int) -> Void, onLoadEnd: @escaping (UIImage?) -> Void) {
         
     }
     
     open func isLoaded(url: String) -> Bool {
         return false
+    }
+    
+    open func save(url: String, image: UIImage, complete: @escaping (Bool) -> Void) -> Void {
+        
     }
 
 }

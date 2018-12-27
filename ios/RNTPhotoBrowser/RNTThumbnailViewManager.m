@@ -11,19 +11,27 @@ RCT_EXPORT_MODULE()
     return [RNTThumbnailView new];
 }
 
-RCT_CUSTOM_VIEW_PROPERTY(uri, NSString, RNTThumbnailView) {
-    NSString *value = [RCTConvert NSString:json];
-    [view loadImage:value];
-}
-
 RCT_CUSTOM_VIEW_PROPERTY(borderRadius, int, RNTThumbnailView) {
     int value = [RCTConvert int:json];
     view.imageView.layer.cornerRadius = value;
-    if (value > 0) {
-        view.imageView.clipsToBounds = YES;
-    } else {
-        view.imageView.clipsToBounds = NO;
-    }
+}
+
+RCT_CUSTOM_VIEW_PROPERTY(uri, NSString, RNTThumbnailView) {
+    NSString *value = [RCTConvert NSString:json];
+    view.url = value;
+    [view refreshIfNeeded];
+}
+
+RCT_CUSTOM_VIEW_PROPERTY(width, int, RNTThumbnailView) {
+    int value = [RCTConvert int:json];
+    view.width = value;
+    [view refreshIfNeeded];
+}
+
+RCT_CUSTOM_VIEW_PROPERTY(height, int, RNTThumbnailView) {
+    int value = [RCTConvert int:json];
+    view.height = value;
+    [view refreshIfNeeded];
 }
 
 RCT_EXPORT_VIEW_PROPERTY(onThumbnailLoadStart, RCTBubblingEventBlock);

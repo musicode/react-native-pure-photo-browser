@@ -1,15 +1,34 @@
 
 import Foundation
 import UIKit
+import Photos
 
 class Configuration: PhotoBrowserConfiguration {
     
     override func isLoaded(url: String) -> Bool {
-        return false
+        return RNTPhotoBrowser.isPhotoLoaded(url)
     }
     
-    override func load(imageView: UIImageView, url: String, onLoadStart: @escaping (Bool) -> Void, onLoadProgress: @escaping (Int64, Int64) -> Void, onLoadEnd: @escaping (Bool) -> Void) {
-        RNTPhotoBrowser.loadImage(imageView, url, onLoadStart, onLoadProgress, onLoadEnd)
+    override func load(imageView: UIImageView, url: String, onLoadStart: @escaping (Bool) -> Void, onLoadProgress: @escaping (Int, Int) -> Void, onLoadEnd: @escaping (UIImage?) -> Void) {
+        RNTPhotoBrowser.loadPhoto(imageView, url, 0, 0, onLoadStart, onLoadProgress, onLoadEnd)
+    }
+    
+    override func save(url: String, image: UIImage, complete: @escaping (Bool) -> Void) {
+        
+        PHPhotoLibrary.shared().performChanges({
+            
+            let path = RNTPhotoBrowser.getPhotoCachePath(url)
+            
+            guard let data = NSData(contentsOf: URL(fileURLWithPath: path)) else {
+                return
+            }
+            
+            PHAssetCreationRequest.forAsset().addResource(with: .photo, data: data as Data, options: nil)
+            
+        }, completionHandler: { success, error in
+            complete(success)
+        })
+        
     }
     
 }
@@ -133,8 +152,12 @@ func formatPhoto(data: [String: String]) -> Photo {
 
 @objc class RNTPhotoBrowser: NSObject {
     
-    @objc public static var loadImage: ((UIImageView, String, (Bool) -> Void, (Int64, Int64) -> Void, (Bool) -> Void) -> Void)!
+    @objc public static var isPhotoLoaded: ((String) -> Bool)!
     
+    @objc public static var loadPhoto: ((UIImageView, String, Int, Int, (Bool) -> Void, (Int, Int) -> Void, (UIImage?) -> Void) -> Void)!
+    
+    @objc public static var getPhotoCachePath: ((String) -> String)!
+
     @objc public static var open: ([[String: String]], Int, String, Int) -> Void = { list, index, indicator, pageMargin in
         
         DispatchQueue.main.async {
