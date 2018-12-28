@@ -41,7 +41,7 @@ public class RNTPhotoBrowserModule extends ReactContextBaseJavaModule {
         PhotoBrowser.configuration = new PhotoBrowserConfiguration() {
             @Override
             public void load(@NotNull ImageView imageView, @NotNull String s, final @NotNull Function1<? super Boolean, Unit> function1, final @NotNull Function2<? super Float, ? super Float, Unit> function2, final @NotNull Function1<? super Boolean, Unit> function11) {
-                loader.load(imageView, s, new RNTPhotoListenr() {
+                loader.load(imageView, s, 0, 0, new RNTPhotoListenr() {
                     @Override
                     public void onLoadStart(boolean hasProgress) {
                         function1.invoke(hasProgress);

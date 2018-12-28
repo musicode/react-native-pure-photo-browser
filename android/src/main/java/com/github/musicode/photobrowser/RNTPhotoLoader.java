@@ -7,7 +7,7 @@ public interface RNTPhotoLoader {
 
     boolean save(String url, Drawable drawable);
 
-    void load(ImageView imageView, String url, RNTPhotoListenr listener);
+    void load(ImageView imageView, String url, int width, int height, RNTPhotoListenr listener);
 
     boolean isLoaded(String url);
 
