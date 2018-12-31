@@ -61,7 +61,7 @@ class PhotoPage: UICollectionViewCell {
     }()
     
     private lazy var normalSpinner: UIActivityIndicatorView = {
-        let view = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+        let view = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
         view.isHidden = true
         view.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(view)

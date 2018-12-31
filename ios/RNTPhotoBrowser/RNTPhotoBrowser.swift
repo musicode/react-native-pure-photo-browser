@@ -128,7 +128,7 @@ class Configuration: PhotoBrowserConfiguration {
             }
         }
         
-        if let data = UIImageJPEGRepresentation(image, quality) as NSData? {
+        if let data = image.jpegData(compressionQuality: quality) as NSData? {
             if data.write(toFile: dest, atomically: true) {
                 return CompressResult(path: dest, width: Int(width), height: Int(height))
             }
@@ -154,7 +154,7 @@ func formatPhoto(data: [String: String]) -> Photo {
     
     @objc public static var isPhotoLoaded: ((String) -> Bool)!
     
-    @objc public static var loadPhoto: ((UIImageView, String, Int, Int, (Bool) -> Void, (Int, Int) -> Void, (UIImage?) -> Void) -> Void)!
+    @objc public static var loadPhoto: ((UIImageView, String, Int, Int, @escaping (Bool) -> Void, @escaping (Int, Int) -> Void, @escaping (UIImage?) -> Void) -> Void)!
     
     @objc public static var getPhotoCachePath: ((String) -> String)!
 

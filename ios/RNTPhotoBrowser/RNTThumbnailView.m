@@ -58,11 +58,11 @@
             if (self.imageView != nil) {
                 self.imageView.image = image;
             }
-            
+
             self.onThumbnailLoadEnd(@{
                                       @"success": image != nil ? @YES : @NO
                                       });
-            
+
         });
     }
 }
