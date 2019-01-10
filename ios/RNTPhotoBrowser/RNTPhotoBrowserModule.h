@@ -10,4 +10,6 @@
 
 + (void)setImageCachePath:(NSString* (^ _Null_unspecified)(NSString*))value;
 
++ (void)setAlbumName:(NSString* (^ _Null_unspecified)())value;
+
 @end

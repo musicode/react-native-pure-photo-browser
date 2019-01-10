@@ -16,6 +16,10 @@
     RNTPhotoBrowser.getPhotoCachePath = value;
 }
 
++ (void)setAlbumName:(NSString* (^ _Null_unspecified)())value {
+    RNTPhotoBrowser.getAlbumName = value;
+}
+
 RCT_EXPORT_MODULE(RNTPhotoBrowser);
 
 RCT_EXPORT_METHOD(openBrowser:(NSArray *)list index:(int)index indicator:(NSString *)indicator pageMargin:(int)pageMargin) {

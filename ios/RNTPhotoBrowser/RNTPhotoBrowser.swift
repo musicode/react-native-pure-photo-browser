@@ -15,20 +15,64 @@ class Configuration: PhotoBrowserConfiguration {
     
     override func save(url: String, image: UIImage, complete: @escaping (Bool) -> Void) {
         
-        PHPhotoLibrary.shared().performChanges({
-            
-            let path = RNTPhotoBrowser.getPhotoCachePath(url)
-            
-            guard let data = NSData(contentsOf: URL(fileURLWithPath: path)) else {
-                return
-            }
-            
-            PHAssetCreationRequest.forAsset().addResource(with: .photo, data: data as Data, options: nil)
-            
-        }, completionHandler: { success, error in
-            complete(success)
-        })
+        let fetchResult = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .albumRegular, options: nil)
+        var album: PHAssetCollection? = nil
+        var albumIdentifier = ""
+        var photoIdentifier: String? = nil
         
+        let albumName = RNTPhotoBrowser.getAlbumName()
+        
+        for i in 0..<fetchResult.count {
+            if fetchResult[i].localizedTitle == albumName {
+                album = fetchResult[i]
+                break
+            }
+        }
+        
+        let addPhoto = {
+            PHPhotoLibrary.shared().performChanges({
+                
+                let path = RNTPhotoBrowser.getPhotoCachePath(url)
+                
+                photoIdentifier = PHAssetCreationRequest.creationRequestForAssetFromImage(atFileURL: URL(fileURLWithPath: path))?.placeholderForCreatedAsset?.localIdentifier
+                
+            }, completionHandler: { success, error in
+                
+                guard error == nil, let localIdentifier = photoIdentifier else {
+                    complete(false)
+                    return
+                }
+                
+                PHPhotoLibrary.shared().performChanges({
+                    
+                    let request = PHAssetCollectionChangeRequest(for: album!)
+                    let asset = PHAsset.fetchAssets(withLocalIdentifiers: [localIdentifier], options: nil).firstObject
+                    
+                    request?.addAssets([asset] as NSFastEnumeration)
+                    
+                }, completionHandler: { success, error in
+                    complete(error == nil)
+                })
+                
+            })
+        }
+        
+        if album == nil {
+            PHPhotoLibrary.shared().performChanges({
+                albumIdentifier = PHAssetCollectionChangeRequest.creationRequestForAssetCollection(withTitle: albumName).placeholderForCreatedAssetCollection.localIdentifier
+            }, completionHandler: { success, error in
+                guard error == nil, let target = PHAssetCollection.fetchAssetCollections(withLocalIdentifiers: [albumIdentifier], options: nil).firstObject else {
+                    complete(false)
+                    return
+                }
+                album = target
+                addPhoto()
+            })
+        }
+        else {
+            addPhoto()
+        }
+
     }
     
 }
@@ -157,6 +201,8 @@ func formatPhoto(data: [String: String]) -> Photo {
     @objc public static var loadPhoto: ((UIImageView, String, Int, Int, @escaping (Bool) -> Void, @escaping (Int, Int) -> Void, @escaping (UIImage?) -> Void) -> Void)!
     
     @objc public static var getPhotoCachePath: ((String) -> String)!
+    
+    @objc public static var getAlbumName: (() -> String)!
 
     @objc public static var open: ([[String: String]], Int, String, Int) -> Void = { list, index, indicator, pageMargin in
         
