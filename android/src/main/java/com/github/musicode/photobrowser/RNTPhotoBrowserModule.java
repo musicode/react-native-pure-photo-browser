@@ -1,18 +1,21 @@
 package com.github.musicode.photobrowser;
 
+import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.media.MediaScannerConnection;
+import android.net.Uri;
+import android.os.Environment;
+import android.util.Log;
+import android.webkit.URLUtil;
 import android.widget.ImageView;
 import android.graphics.drawable.Drawable;
 
-import com.facebook.react.bridge.Arguments;
-import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
-import com.facebook.react.bridge.WritableMap;
 import com.github.herokotlin.photobrowser.PhotoBrowser;
 import com.github.herokotlin.photobrowser.PhotoBrowserActivity;
 import com.github.herokotlin.photobrowser.PhotoBrowserConfiguration;
@@ -21,10 +24,11 @@ import com.github.herokotlin.photobrowser.model.Photo;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
-import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
-import id.zelory.compressor.Compressor;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
@@ -33,15 +37,35 @@ public class RNTPhotoBrowserModule extends ReactContextBaseJavaModule {
 
     private final ReactApplicationContext reactContext;
 
+    private static Boolean isScannerConnected = false;
+
+    public static String albumName = "";
+
     static RNTPhotoLoader photoLoader;
 
-    public static void setPhotoLoader(final RNTPhotoLoader loader) {
+    public static void setPhotoLoader(Context context, final RNTPhotoLoader loader) {
+
         photoLoader = loader;
+
+        final MediaScannerConnection scanner = new MediaScannerConnection(context, new MediaScannerConnection.MediaScannerConnectionClient() {
+            @Override
+            public void onMediaScannerConnected() {
+                isScannerConnected = true;
+            }
+
+            @Override
+            public void onScanCompleted(String path, Uri uri) {
+
+            }
+        });
+
+        scanner.connect();
+
 
         PhotoBrowser.configuration = new PhotoBrowserConfiguration() {
             @Override
             public void load(@NotNull ImageView imageView, @NotNull String s, final @NotNull Function1<? super Boolean, Unit> function1, final @NotNull Function2<? super Float, ? super Float, Unit> function2, final @NotNull Function1<? super Boolean, Unit> function11) {
-                loader.load(imageView, s, 0, 0, new RNTPhotoListenr() {
+                loader.load(imageView, s, new RNTPhotoListenr() {
                     @Override
                     public void onLoadStart(boolean hasProgress) {
                         function1.invoke(hasProgress);
@@ -60,13 +84,76 @@ public class RNTPhotoBrowserModule extends ReactContextBaseJavaModule {
             }
 
             @Override
-            public boolean isLoaded(@NotNull String s) {
-                return loader.isLoaded(s);
+            public boolean isLoaded(String url) {
+                return loader.isLoaded(url);
             }
 
             @Override
-            public boolean save(@NotNull String s, @NotNull Drawable drawable) {
-                return loader.save(s, drawable);
+            public boolean save(String url, Drawable drawable) {
+
+                String fileName = URLUtil.guessFileName(url, null, null);
+
+                File albumDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+                if (!albumName.isEmpty()) {
+                    albumDir = new File(albumDir, albumName);
+                    if (!albumDir.exists()) {
+                        albumDir.mkdir();
+                    }
+                }
+
+                String filePath = albumDir.getAbsolutePath() + "/" + fileName;
+                File image = new File(filePath);
+                if (image.exists()) {
+                    return true;
+                }
+
+                try {
+                    FileOutputStream outputStream = new FileOutputStream(filePath);
+                    if (drawable instanceof BitmapDrawable) {
+                        Bitmap.CompressFormat format = Bitmap.CompressFormat.JPEG;
+
+                        String extName = "";
+                        int index = fileName.lastIndexOf(".");
+                        if (index > 0) {
+                            extName = fileName.substring(index + 1);
+                        }
+
+                        if (extName.equals(".png")) {
+                            format = Bitmap.CompressFormat.PNG;
+                        }
+                        else if (extName.equals(".webp")) {
+                            format = Bitmap.CompressFormat.WEBP;
+                        }
+
+                        ((BitmapDrawable)drawable).getBitmap().compress(format, 100, outputStream);
+                    }
+                    else {
+                        ByteBuffer buffer = loader.getBuffer(drawable);
+                        if (buffer == null) {
+                            return false;
+                        }
+                        byte[] bytes = new byte[buffer.capacity()];
+                        ((ByteBuffer)buffer.duplicate().clear()).get(bytes);
+                        outputStream.write(bytes, 0, bytes.length);
+                    }
+
+                    outputStream.close();
+
+                    if (isScannerConnected) {
+                        scanner.scanFile(filePath, "image/*");
+                        return true;
+                    }
+
+                }
+                catch (FileNotFoundException e) {
+                    Log.d("RNPhotoBrowser", "save photo FileNotFoundException " + e);
+                }
+                catch (Exception e) {
+                    Log.d("RNPhotoBrowser", "save photo Exception " + e);
+                }
+
+                return false;
+
             }
         };
     }
@@ -82,7 +169,7 @@ public class RNTPhotoBrowserModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void openBrowser(ReadableArray list, int index, String indicator, int pageMargin) {
+    public void open(ReadableArray list, int index, String indicator, int pageMargin) {
 
         ArrayList<Photo> photos = new ArrayList<Photo>();
 
@@ -92,44 +179,6 @@ public class RNTPhotoBrowserModule extends ReactContextBaseJavaModule {
 
         PhotoBrowserActivity.Companion.newInstance(reactContext.getCurrentActivity(), photos, index, indicator, pageMargin);
 
-    }
-
-    @ReactMethod
-    public void compressImage(String src, String dest, Callback callback) {
-        File file = new File(src);
-        if (file.exists()) {
-            try {
-                File destFile = new File(dest);
-
-                File result = new Compressor(reactContext)
-                        .setMaxWidth(2000)
-                        .setMaxHeight(2000)
-                        .setQuality(50)
-                        .setCompressFormat(Bitmap.CompressFormat.JPEG)
-                        .setDestinationDirectoryPath(destFile.getParent())
-                        .compressToFile(file, destFile.getName());
-
-                if (result.exists()) {
-                    String path = result.getAbsolutePath();
-
-                    BitmapFactory.Options options = new BitmapFactory.Options();
-                    options.inJustDecodeBounds = true;
-                    BitmapFactory.decodeFile(path, options);
-
-                    WritableMap map = Arguments.createMap();
-                    map.putString("path", path);
-                    map.putInt("width", options.outWidth);
-                    map.putInt("height", options.outHeight);
-
-                    callback.invoke(null, map);
-                    return;
-                }
-            }
-            catch (IOException e) {
-
-            }
-        }
-        callback.invoke("io error");
     }
 
     private Photo formatPhoto(ReadableMap data) {

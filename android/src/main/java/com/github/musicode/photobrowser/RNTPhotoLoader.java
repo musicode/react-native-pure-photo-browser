@@ -3,12 +3,14 @@ package com.github.musicode.photobrowser;
 import android.widget.ImageView;
 import android.graphics.drawable.Drawable;
 
+import java.nio.ByteBuffer;
+
 public interface RNTPhotoLoader {
 
-    boolean save(String url, Drawable drawable);
-
-    void load(ImageView imageView, String url, int width, int height, RNTPhotoListenr listener);
+    ByteBuffer getBuffer(Drawable drawable);
 
     boolean isLoaded(String url);
+
+    void load(ImageView imageView, String url, RNTPhotoListenr listener);
 
 }

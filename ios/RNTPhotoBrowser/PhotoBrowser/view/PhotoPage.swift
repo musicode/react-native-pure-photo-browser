@@ -19,14 +19,18 @@ class PhotoPage: UICollectionViewCell {
     
     lazy var photoView: PhotoView = {
         let view = PhotoView()
+        view.onReset = {
+            self.updateBounce()
+        }
         view.onTap = {
             self.onTap?(self.photo)
         }
         view.onLongPress = {
             self.onLongPress?(self.photo)
         }
-        view.onScaleChange = { scale in
-            self.photo.scale = scale
+        view.onScaleChange = {
+            self.photo.scale = view.scale
+            self.updateBounce()
             self.onScaleChange?(self.photo)
         }
         view.onDragStart = {
@@ -102,17 +106,27 @@ class PhotoPage: UICollectionViewCell {
         loadPhoto(url: photo.rawUrl, configuration: configuration)
     }
     
+    private func updateBounce() {
+        photoView.bounceHorizontal = photoView.scale > photoView.minScale
+    }
+    
     private func loadPhoto(url: String, configuration: PhotoBrowserConfiguration) {
         
         configuration.load(
             imageView: photoView.imageView,
             url: url,
             onLoadStart: { hasProgress in
-                self.onLoadStart(url: url, hasProgress: hasProgress)
+                DispatchQueue.main.async {
+                    self.onLoadStart(url: url, hasProgress: hasProgress)
+                }
             }, onLoadProgress: { loaded, total in
-                self.onLoadProgress(loaded: loaded, total: total)
+                DispatchQueue.main.async {
+                    self.onLoadProgress(loaded: loaded, total: total)
+                }
             }, onLoadEnd: { image in
-                self.onLoadEnd(url: url, image: image)
+                DispatchQueue.main.async {
+                    self.onLoadEnd(url: url, image: image)
+                }
             }
         )
         

@@ -24,10 +24,7 @@ public class RNTThumbnailView extends ThumbnailView {
 
     void refreshIfNeeded() {
         if (width > 0 && height > 0 && uri.length() > 0) {
-
-            final ReactContext context = (ReactContext)getContext();
-
-            RNTPhotoBrowserModule.photoLoader.load(this, uri, width, height, new RNTPhotoListenr() {
+            RNTPhotoBrowserModule.photoLoader.load(this, uri, new RNTPhotoListenr() {
                 @Override
                 public void onLoadStart(boolean hasProgress) {
                     sendEvent("onLoadStart", null);

@@ -27,7 +27,7 @@
     if (self.width > 0 && self.height > 0 && self.url.length > 0 && self.isAlive && self.imageView != nil) {
         typeof(self) __weak __weak_self__ = self;
         
-        RNTPhotoBrowser.loadPhoto(self.imageView, self.url, self.width, self.height, ^(BOOL hasProgress) {
+        RNTPhotoBrowser.loadImage(self.imageView, self.url, ^(BOOL hasProgress) {
             
             typeof(__weak_self__) __strong self = __weak_self__;
             if (self == nil) {

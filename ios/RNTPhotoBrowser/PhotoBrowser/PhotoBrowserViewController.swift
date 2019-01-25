@@ -1,7 +1,7 @@
 
 import UIKit
 
-public class PhotoBrowserController: UIViewController {
+public class PhotoBrowserViewController: UIViewController {
 
     private var index = 0
     private var photos = [Photo]()
@@ -88,7 +88,7 @@ public class PhotoBrowserController: UIViewController {
 
 }
 
-extension PhotoBrowserController: PhotoBrowserDelegate {
+extension PhotoBrowserViewController: PhotoBrowserDelegate {
     
     public func photoBrowserDidTap(photo: Photo) {
         dismiss(animated: true, completion: nil)

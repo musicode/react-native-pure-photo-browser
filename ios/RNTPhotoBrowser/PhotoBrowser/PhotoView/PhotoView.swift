@@ -10,8 +10,21 @@ import UIKit
 // 这样双击放大不会触发 layoutSubviews
 public class PhotoView: UIView {
     
+    public var bounceVertiical = true {
+        didSet {
+            scrollView.alwaysBounceVertical = bounceVertiical
+        }
+    }
+    
+    public var bounceHorizontal = true {
+        didSet {
+            scrollView.alwaysBounceHorizontal = bounceHorizontal
+        }
+    }
+    
     private lazy var scrollView: UIScrollView = {
         let view = UIScrollView()
+        
         if #available(iOS 11.0, *) {
             view.contentInsetAdjustmentBehavior = .never
         }
@@ -20,6 +33,10 @@ public class PhotoView: UIView {
         view.showsVerticalScrollIndicator = false
         view.showsHorizontalScrollIndicator = false
         view.delegate = self
+        
+        view.addObserver(self, forKeyPath: "contentSize", options: [.new, .old], context: nil)
+        view.addObserver(self, forKeyPath: "contentOffset", options: [.new, .old], context: nil)
+        
         addSubview(view)
         return view
     }()
@@ -31,14 +48,103 @@ public class PhotoView: UIView {
         scrollView.addSubview(view)
         return view
     }()
-
+    
+    public override var frame: CGRect {
+        didSet {
+            size = frame.size
+        }
+    }
+    
+    private var size = CGSize.zero {
+        didSet {
+            
+            let oldWidth = oldValue.width
+            let oldHeight = oldValue.height
+            
+            let newWidth = size.width
+            let newHeight = size.height
+            
+            guard newWidth != oldWidth || newHeight != oldHeight else {
+                return
+            }
+            scrollView.frame = CGRect(x: 0, y: 0, width: newWidth, height: newHeight)
+            
+            reset()
+            
+        }
+    }
+    
     public var scaleType = ScaleType.fillWidth
+    
+    public var scale: CGFloat {
+        get {
+            return scrollView.zoomScale
+        }
+        set {
+            scrollView.zoomScale = newValue
+        }
+    }
+    
+    public var minScale: CGFloat {
+        get {
+            return scrollView.minimumZoomScale
+        }
+        set {
+            scrollView.minimumZoomScale = newValue
+        }
+    }
+    
+    public var maxScale: CGFloat {
+        get {
+            return scrollView.maximumZoomScale
+        }
+        set {
+            scrollView.maximumZoomScale = newValue
+        }
+    }
+    
+    public var imageOrigin: CGPoint {
+        get {
+            let contentOffset = scrollView.contentOffset
+            return CGPoint(x: -contentOffset.x, y: -contentOffset.y)
+        }
+        set {
+            scrollView.contentOffset = CGPoint(x: -newValue.x, y: -newValue.y)
+        }
+    }
+    
+    public var imageSize: CGSize {
+        get {
+            return imageView.frame.size
+        }
+    }
+    
+    public var imageOriginalSize: CGSize? {
+        get {
+            guard let image = imageView.image else {
+                return nil
+            }
+            return getImageSize(image: image)
+        }
+    }
+    
+    public var calculateMaxScale: ((CGFloat) -> CGFloat) = { scale in
+        return 3 * scale < 1 ? 1 : (3 * scale)
+    }
+    public var calculateMinScale: ((CGFloat) -> CGFloat) = { scale in
+        return scale
+    }
+
+    public var onReset: (() -> Void)?
     
     public var onTap: (() -> Void)?
     public var onLongPress: (() -> Void)?
-    public var onScaleChange: ((CGFloat) -> Void)?
+    public var onScaleChange: (() -> Void)?
+    public var onOriginChange: (() -> Void)?
     public var onDragStart: (() -> Void)?
     public var onDragEnd: (() -> Void)?
+    
+    public var contentInset: UIEdgeInsets?
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -51,32 +157,80 @@ public class PhotoView: UIView {
     }
     
     public func reset(image: UIImage? = nil) {
-        
-        scrollView.minimumZoomScale = 1
-        scrollView.maximumZoomScale = 1
-        scrollView.zoomScale = 1
-        
+
         if let image = image {
-            imageView.frame.size = image.size
+            
+            minScale = 1
+            maxScale = 1
+            scale = 1
+
+            imageView.frame.size = getImageSize(image: image)
+            
         }
         
         updateZoomScale()
-        updateImagePosition()
+        updateImageOrigin()
         
-        scrollView.contentOffset = CGPoint(x: 0, y: 0)
+        onReset?()
         
     }
 
-    public override func layoutSubviews() {
-        super.layoutSubviews()
-        scrollView.frame = bounds
-        reset()
+    private func getContentInset() -> UIEdgeInsets {
+        
+        guard contentInset == nil else {
+            return contentInset!
+        }
+        
+        let imageSize = imageView.frame.size
+        guard imageSize.width > 0 && imageSize.height > 0 else {
+            return .zero
+        }
+        
+        let viewSize = bounds.size
+        
+        var insetHorizontal: CGFloat = 0
+        var insetVertical: CGFloat = 0
+        
+        if viewSize.width > imageSize.width {
+            insetHorizontal = (viewSize.width - imageSize.width) / 2
+        }
+        if viewSize.height > imageSize.height {
+            insetVertical = (viewSize.height - imageSize.height) / 2
+        }
+        
+        return UIEdgeInsets(top: insetVertical, left: insetHorizontal, bottom: insetVertical, right: insetHorizontal)
+        
     }
     
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        size = frame.size
+    }
+
     public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if let image = imageView.image {
-            reset(image: image)
+        
+        guard let keyPath = keyPath else {
+            return
         }
+        
+        switch keyPath {
+        case "image":
+            if let image = imageView.image {
+                reset(image: image)
+            }
+            break
+            
+        case "contentSize":
+            onScaleChange?()
+            break
+            
+        case "contentOffset":
+            onOriginChange?()
+            break
+        default: ()
+        }
+        
+        
     }
 
 }
@@ -96,8 +250,7 @@ extension PhotoView: UIScrollViewDelegate {
     }
     
     public func scrollViewDidZoom(_ scrollView: UIScrollView) {
-        updateImagePosition()
-        onScaleChange?(scrollView.zoomScale / scrollView.minimumZoomScale)
+        updateImageOrigin()
     }
     
 }
@@ -126,52 +279,50 @@ extension PhotoView {
     
     private func updateZoomScale() {
         
-        guard let image = imageView.image else {
+        guard let imageSize = imageOriginalSize else {
             return
         }
 
-        let viewSize = bounds.size
-        let imageSize = image.size
+        let contentInset = getContentInset()
+        let viewWidth = bounds.size.width - contentInset.left - contentInset.right
+        let viewHeight = bounds.size.height - contentInset.top - contentInset.bottom
         
-        let widthScale = viewSize.width / imageSize.width
-        let heightScale = viewSize.height / imageSize.height
-        let scale: CGFloat
+        let imageWidth = imageSize.width
+        let imageHeight = imageSize.height
         
+        let widthScale = viewWidth / imageWidth
+        let heightScale = viewHeight / imageHeight
+
+        let zoomScale: CGFloat
         if scaleType == .fillWidth {
-            scale = widthScale
+            zoomScale = widthScale
         }
         else if scaleType == .fillHeight {
-            scale = heightScale
+            zoomScale = heightScale
+        }
+        else if scaleType == .fill {
+            zoomScale = max(widthScale, heightScale)
         }
         else {
-            scale = min(widthScale, heightScale)
+            zoomScale = min(widthScale, heightScale)
         }
 
-        scrollView.maximumZoomScale = 3 * scale < 1 ? 1 : (3 * scale)
-        scrollView.minimumZoomScale = scale
-        scrollView.zoomScale = scale
+        minScale = calculateMinScale(zoomScale)
+        maxScale = max(calculateMaxScale(zoomScale), minScale)
+        
+        scale = zoomScale
         
     }
     
-    private func updateImagePosition() {
+    private func updateImageOrigin() {
         
-        let imageSize = imageView.frame.size
-        guard imageSize.width > 0 && imageSize.height > 0 else {
-            return
-        }
-        
-        let viewSize = bounds.size
-        
-        let x = max(viewSize.width, imageSize.width) / 2
-        let y = max(viewSize.height, imageSize.height) / 2
-        
-        imageView.center = CGPoint(x: x, y: y)
-        
+        scrollView.contentInset = getContentInset()
+
     }
     
     private func getZoomRect(point: CGPoint, zoomScale: CGFloat) -> CGRect {
         
-        // 传入的 zoomPoint 是相对于图片的实际尺寸计算的
+        // 传入的 point 是相对于图片的实际尺寸计算的
 
         let x = point.x
         let y = point.y
@@ -186,6 +337,13 @@ extension PhotoView {
         
     }
     
+    private func getImageSize(image: UIImage) -> CGSize {
+        return CGSize(
+            width: image.size.width * image.scale,
+            height: image.size.height * image.scale
+        )
+    }
+    
     @objc private func onTapGesture(_ gesture: UILongPressGestureRecognizer) {
         
         onTap?()
@@ -194,10 +352,15 @@ extension PhotoView {
     
     @objc private func onDoubleTapGesture(_ gesture: UITapGestureRecognizer) {
         
-        let scale = scrollView.zoomScale < scrollView.maximumZoomScale ? scrollView.maximumZoomScale : scrollView.minimumZoomScale
-        let point = gesture.location(in: imageView)
+        // 距离谁比较远就去谁
+        let zoomScale = (scale - minScale > maxScale - scale) ? minScale : maxScale
+        guard zoomScale != scale else {
+            return
+        }
         
-        scrollView.zoom(to: getZoomRect(point: point, zoomScale: scale), animated: true)
+        let point = gesture.location(in: imageView)
+
+        scrollView.zoom(to: getZoomRect(point: point, zoomScale: zoomScale), animated: true)
         
     }
     
@@ -216,7 +379,7 @@ extension PhotoView {
 extension PhotoView {
     
     public enum ScaleType {
-        case fit, fillWidth, fillHeight
+        case fit, fill, fillWidth, fillHeight
     }
     
 }

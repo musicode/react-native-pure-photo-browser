@@ -4,43 +4,26 @@
 
 @implementation RNTPhotoBrowserModule
 
-+ (void)setImageLoader:(void (^ _Null_unspecified)(UIImageView * _Nonnull, NSString * _Nonnull, NSInteger, NSInteger, void (^ _Nonnull)(BOOL), void (^ _Nonnull)(NSInteger, NSInteger), void (^ _Nonnull)(UIImage*)))value {
-    RNTPhotoBrowser.loadPhoto = value;
++ (void)setImageLoader:(void (^)(UIImageView *, NSString *, void (^ _Null_unspecified)(BOOL), void (^ _Null_unspecified)(NSInteger, NSInteger), void (^ _Null_unspecified)(UIImage *)))value {
+    RNTPhotoBrowser.loadImage = value;
 }
 
 + (void)setImageIsLoaded:(BOOL (^)(NSString *))value {
-    RNTPhotoBrowser.isPhotoLoaded = value;
+    RNTPhotoBrowser.isImageLoaded = value;
 }
 
-+ (void)setImageCachePath:(NSString* (^ _Null_unspecified)(NSString *))value {
-    RNTPhotoBrowser.getPhotoCachePath = value;
++ (void)setImageCachePath:(NSString *(^)(NSString *))value {
+    RNTPhotoBrowser.getImageCachePath = value;
 }
 
-+ (void)setAlbumName:(NSString* (^ _Null_unspecified)())value {
-    RNTPhotoBrowser.getAlbumName = value;
++ (void)setAlbumName:(NSString *)name {
+    RNTPhotoBrowser.albumName = name;
 }
 
 RCT_EXPORT_MODULE(RNTPhotoBrowser);
 
-RCT_EXPORT_METHOD(openBrowser:(NSArray *)list index:(int)index indicator:(NSString *)indicator pageMargin:(int)pageMargin) {
+RCT_EXPORT_METHOD(open:(NSArray *)list index:(int)index indicator:(NSString *)indicator pageMargin:(int)pageMargin) {
     RNTPhotoBrowser.open(list, index, indicator, pageMargin);
-}
-
-RCT_EXPORT_METHOD(compressImage:(NSString *)src dest:(NSString *)dest callback:(RCTResponseSenderBlock)callback) {
-    CompressResult *result = RNTPhotoBrowser.compress(src, dest);
-    if (result != nil) {
-        callback(@[
-                   [NSNull null],
-                   @{
-                       @"path": result.path,
-                       @"width": [NSNumber numberWithInteger:result.width],
-                       @"height": [NSNumber numberWithInteger:result.height]
-                       }
-                   ]);
-    }
-    else {
-        callback(@[@"error"]);
-    }
 }
 
 @end
