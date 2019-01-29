@@ -7,7 +7,7 @@
 
 @implementation RNTPhotoBrowserManager
 
-+ (void)setImageLoader:(void (^)(UIImageView *, NSString *, void (^ _Null_unspecified)(BOOL), void (^ _Null_unspecified)(NSInteger, NSInteger), void (^ _Null_unspecified)(UIImage *)))value {
++ (void)setImageLoader:(void (^)(UIImageView *, NSString *, NSInteger, NSInteger, void (^ _Null_unspecified)(BOOL), void (^ _Null_unspecified)(NSInteger, NSInteger), void (^ _Null_unspecified)(UIImage *)))value {
     RNTPhotoBrowserConfiguration.loadImage = value;
 }
 

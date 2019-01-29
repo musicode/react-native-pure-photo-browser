@@ -3,6 +3,8 @@ import UIKit
 
 class PhotoPage: UICollectionViewCell {
     
+    var configuration: PhotoBrowserConfiguration!
+    
     var onTap: ((Photo) -> Void)?
     
     var onLongPress: ((Photo) -> Void)?
@@ -78,17 +80,66 @@ class PhotoPage: UICollectionViewCell {
     
     var photo: Photo!
     
-    var loadedUrl = ""
-    
     private var hasRawUrl: Bool {
         get {
             return photo.rawUrl != "" && photo.rawUrl != photo.highQualityUrl
         }
     }
 
-    func update(photo: Photo, configuration: PhotoBrowserConfiguration) {
+    func update(photo: Photo) {
         
         self.photo = photo
+        
+        if photo.thumbnailUrl != ""
+            && photo.thumbnailUrl != photo.highQualityUrl
+            && !photo.isHighQualityPhotoLoaded
+        {
+            loadThumbnail()
+        }
+        else {
+            loadHighQuality()
+        }
+        
+    }
+    
+    // 识别二维码
+    func detectQRCode(callback: @escaping (String) -> Void) {
+        
+        guard let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: nil), let image = photoView.imageView.image?.cgImage else {
+            return callback("")
+        }
+
+        DispatchQueue.global(qos: .default).async {
+            
+            var text = ""
+            
+            let infos = detector.features(in: CIImage(cgImage: image))
+            if infos.count > 0 {
+                if let info = infos[0] as? CIQRCodeFeature {
+                    text = info.messageString ?? ""
+                }
+            }
+            
+            DispatchQueue.main.async {
+                callback(text)
+            }
+        }
+        
+    }
+
+    func loadRawPhoto() {
+        loadPhoto(url: photo.rawUrl)
+    }
+    
+    private func updateBounce() {
+        photoView.bounceHorizontal = photoView.scale > photoView.minScale
+    }
+    
+    private func loadThumbnail() {
+        loadPhoto(url: photo.thumbnailUrl)
+    }
+    
+    private func loadHighQuality() {
         
         var url = photo.highQualityUrl
         
@@ -96,40 +147,11 @@ class PhotoPage: UICollectionViewCell {
             url = photo.rawUrl
         }
         
-        if url != loadedUrl {
-            loadPhoto(url: url, configuration: configuration)
-        }
+        loadPhoto(url: url)
         
     }
     
-    // 识别二维码
-    func detectQRCode() -> String {
-        
-        guard let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: nil), let image = photoView.imageView.image?.cgImage else {
-            return ""
-        }
-
-        let infos = detector.features(in: CIImage(cgImage: image))
-        if infos.count > 0 {
-            guard let info = infos[0] as? CIQRCodeFeature else {
-                return ""
-            }
-            return info.messageString ?? ""
-        }
-        
-        return ""
-        
-    }
-
-    func loadRawPhoto(configuration: PhotoBrowserConfiguration) {
-        loadPhoto(url: photo.rawUrl, configuration: configuration)
-    }
-    
-    private func updateBounce() {
-        photoView.bounceHorizontal = photoView.scale > photoView.minScale
-    }
-    
-    private func loadPhoto(url: String, configuration: PhotoBrowserConfiguration) {
+    private func loadPhoto(url: String) {
         
         configuration.load(
             imageView: photoView.imageView,
@@ -194,17 +216,23 @@ class PhotoPage: UICollectionViewCell {
         photoView.imageView.image = image
         
         if image != nil {
-            if hasRawUrl {
-                if url == photo.highQualityUrl {
-                    photo.isRawButtonVisible = true
-                }
-                else {
-                    photo.isRawPhotoLoaded = url == photo.rawUrl
-                    photo.isRawButtonVisible = false
+            if photo.thumbnailUrl != photo.highQualityUrl && url == photo.thumbnailUrl {
+                DispatchQueue.main.async {
+                    self.loadHighQuality()
                 }
             }
-            photo.isSaveButtonVisible = true
-            loadedUrl = url
+            else {
+                if url == photo.highQualityUrl {
+                    photo.isHighQualityPhotoLoaded = true
+                }
+                else if url == photo.rawUrl {
+                    photo.isRawPhotoLoaded = true
+                }
+                if hasRawUrl {
+                    photo.isRawButtonVisible = url == photo.highQualityUrl
+                }
+                photo.isSaveButtonVisible = true
+            }
         }
         else if hasRawUrl && url == photo.rawUrl {
             photo.isRawButtonVisible = true

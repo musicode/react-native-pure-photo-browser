@@ -25,6 +25,9 @@ import UIKit
     // 记录当前是否需要显示保存按钮
     var isSaveButtonVisible = false
     
+    // 记录是否加载过高清图
+    var isHighQualityPhotoLoaded = false
+    
     // 记录是否加载过原图
     var isRawPhotoLoaded = false
     

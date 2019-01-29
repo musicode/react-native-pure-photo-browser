@@ -22,7 +22,7 @@ public class RNTThumbnailView extends ThumbnailView {
 
     void refreshIfNeeded() {
         if (width > 0 && height > 0 && uri.length() > 0) {
-            RNTPhotoBrowserManager.imageLoader.load(this, uri, new RNTPhotoBrowserListenr() {
+            RNTPhotoBrowserManager.imageLoader.load(this, uri, width, height, new RNTPhotoBrowserListenr() {
                 @Override
                 public void onLoadStart(boolean hasProgress) {
                     sendEvent("onLoadStart", null);

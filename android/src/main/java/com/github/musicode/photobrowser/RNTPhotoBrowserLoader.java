@@ -14,6 +14,6 @@ public interface RNTPhotoBrowserLoader {
 
     void getImageCachePath(String url, Function1<String, Unit> callback);
 
-    void load(ImageView imageView, String url, RNTPhotoBrowserListenr listener);
+    void load(ImageView imageView, String url, int width, int height, RNTPhotoBrowserListenr listener);
 
 }

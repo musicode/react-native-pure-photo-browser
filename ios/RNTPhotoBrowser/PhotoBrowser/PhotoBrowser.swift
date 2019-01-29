@@ -84,7 +84,7 @@ public class PhotoBrowser: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         
         view.onClick = {
-            self.getCurrentPage().loadRawPhoto(configuration: self.configuration)
+            self.getCurrentPage().loadRawPhoto()
         }
         
         addSubview(view)
@@ -221,7 +221,7 @@ public class PhotoBrowser: UIView {
         saveButton.isHidden = true
         
         configuration.save(
-            url: currentPage.loadedUrl,
+            url: currentPage.photo.currentUrl,
             image: currentPage.photoView.imageView.image!,
             complete: { success in
                 DispatchQueue.main.async {
@@ -237,12 +237,7 @@ public class PhotoBrowser: UIView {
     
     @objc public func detectQRCode(callback: @escaping (String) -> Void) {
         
-        DispatchQueue.global(qos: .default).async {
-            let text = self.getCurrentPage().detectQRCode()
-            DispatchQueue.main.async {
-                callback(text)
-            }
-        }
+        getCurrentPage().detectQRCode(callback: callback)
         
     }
 
@@ -262,6 +257,7 @@ extension PhotoBrowser: UICollectionViewDataSource {
                 self.updateStatus(photo: photo)
             }
         }
+        cell.configuration = configuration
         cell.onScaleChange = onPageUpdate
         cell.onLoadStart = onPageUpdate
         cell.onLoadEnd = onPageUpdate
@@ -273,7 +269,7 @@ extension PhotoBrowser: UICollectionViewDataSource {
         cell.onLongPress = { photo in
             self.delegate.photoBrowserDidLongPress(photo: photo, index: cellIndex)
         }
-        cell.update(photo: photos[cellIndex], configuration: configuration)
+        cell.update(photo: photos[cellIndex])
         return cell
     }
 

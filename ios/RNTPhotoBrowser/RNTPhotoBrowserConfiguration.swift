@@ -7,7 +7,7 @@ import Photos
 
     @objc public static var isImageLoaded: ((String) -> Bool)!
     
-    @objc public static var loadImage: ((UIImageView, String, @escaping (Bool) -> Void, @escaping (Int, Int) -> Void, @escaping (UIImage?) -> Void) -> Void)!
+    @objc public static var loadImage: ((UIImageView, String, Int, Int, @escaping (Bool) -> Void, @escaping (Int, Int) -> Void, @escaping (UIImage?) -> Void) -> Void)!
 
     @objc public static var getImageCachePath: ((String) -> String)!
 
@@ -18,7 +18,7 @@ import Photos
     }
     
     override func load(imageView: UIImageView, url: String, onLoadStart: @escaping (Bool) -> Void, onLoadProgress: @escaping (Int, Int) -> Void, onLoadEnd: @escaping (UIImage?) -> Void) {
-        RNTPhotoBrowserConfiguration.loadImage(imageView, url, onLoadStart, onLoadProgress, onLoadEnd)
+        RNTPhotoBrowserConfiguration.loadImage(imageView, url, 0, 0, onLoadStart, onLoadProgress, onLoadEnd)
     }
     
     override func save(url: String, image: UIImage, complete: @escaping (Bool) -> Void) {
