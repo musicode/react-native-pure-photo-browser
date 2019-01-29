@@ -1,8 +1,7 @@
 
 #import <React/RCTViewManager.h>
-#import <React/RCTBridgeModule.h>
 
-@interface RNTPhotoBrowserModule : NSObject <RCTBridgeModule>
+@interface RNTPhotoBrowserManager : RCTViewManager
 
 + (void)setImageLoader:(void (^ _Null_unspecified)(UIImageView*, NSString*, void (^ _Null_unspecified)(BOOL), void (^ _Null_unspecified)(NSInteger, NSInteger), void (^ _Null_unspecified)(UIImage*)))value;
 

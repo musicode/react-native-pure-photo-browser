@@ -1,4 +1,5 @@
 
+import PhotoBrowser from './js/PhotoBrowser'
 import ThumbnailView from './js/ThumbnailView'
 
-export { ThumbnailView }
+export { PhotoBrowser, ThumbnailView }

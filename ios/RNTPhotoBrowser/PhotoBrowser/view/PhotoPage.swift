@@ -101,6 +101,25 @@ class PhotoPage: UICollectionViewCell {
         }
         
     }
+    
+    // 识别二维码
+    func detectQRCode() -> String {
+        
+        guard let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: nil), let image = photoView.imageView.image?.cgImage else {
+            return ""
+        }
+
+        let infos = detector.features(in: CIImage(cgImage: image))
+        if infos.count > 0 {
+            guard let info = infos[0] as? CIQRCodeFeature else {
+                return ""
+            }
+            return info.messageString ?? ""
+        }
+        
+        return ""
+        
+    }
 
     func loadRawPhoto(configuration: PhotoBrowserConfiguration) {
         loadPhoto(url: photo.rawUrl, configuration: configuration)
@@ -171,6 +190,7 @@ class PhotoPage: UICollectionViewCell {
             circleSpinner.isHidden = true
         }
         
+        photo.currentUrl = url
         photoView.imageView.image = image
         
         if image != nil {
@@ -193,5 +213,5 @@ class PhotoPage: UICollectionViewCell {
         onLoadEnd?(photo)
         
     }
-    
+
 }

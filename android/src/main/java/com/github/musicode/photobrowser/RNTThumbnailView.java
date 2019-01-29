@@ -8,8 +8,6 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.github.herokotlin.photoview.ThumbnailView;
 
-import org.jetbrains.annotations.NotNull;
-
 public class RNTThumbnailView extends ThumbnailView {
 
     int width = 0;
@@ -18,13 +16,13 @@ public class RNTThumbnailView extends ThumbnailView {
 
     String uri = "";
 
-    public RNTThumbnailView(@NotNull Context context) {
+    public RNTThumbnailView(Context context) {
         super(context);
     }
 
     void refreshIfNeeded() {
         if (width > 0 && height > 0 && uri.length() > 0) {
-            RNTPhotoBrowserModule.photoLoader.load(this, uri, new RNTPhotoListenr() {
+            RNTPhotoBrowserManager.imageLoader.load(this, uri, new RNTPhotoBrowserListenr() {
                 @Override
                 public void onLoadStart(boolean hasProgress) {
                     sendEvent("onLoadStart", null);

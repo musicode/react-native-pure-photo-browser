@@ -14,7 +14,7 @@ public class RNTPhotoBrowserPackage implements ReactPackage {
 
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-      return Arrays.<NativeModule>asList(new RNTPhotoBrowserModule(reactContext));
+      return Collections.emptyList();
     }
 
     // Deprecated from RN 0.47
@@ -25,7 +25,8 @@ public class RNTPhotoBrowserPackage implements ReactPackage {
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
         return Arrays.<ViewManager>asList(
-            new RNTThumbnailViewManager(reactContext)
+            new RNTThumbnailViewManager(reactContext),
+            new RNTPhotoBrowserManager(reactContext)
         );
     }
 

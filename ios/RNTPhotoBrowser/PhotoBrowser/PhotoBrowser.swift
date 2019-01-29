@@ -107,26 +107,7 @@ public class PhotoBrowser: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         
         view.onClick = {
-            self.saveButton.isHidden = true
-        
-            let currentPage = self.getCurrentPage()
-            guard let photo = currentPage.photo else {
-                return
-            }
-            
-            self.configuration.save(
-                url: currentPage.loadedUrl,
-                image: currentPage.photoView.imageView.image!,
-                complete: { success in
-                    DispatchQueue.main.async {
-                        if !success {
-                            self.saveButton.isHidden = false
-                        }
-                        self.delegate.photoBrowserDidSave(photo: photo, success: success)
-                    }
-                }
-            )
-
+            self.saveImage()
         }
         
         addSubview(view)
@@ -142,11 +123,11 @@ public class PhotoBrowser: UIView {
     
     private let cellIdentifier = "cell"
     
-    private var configuration: PhotoBrowserConfiguration!
+    @objc private var configuration: PhotoBrowserConfiguration!
     
-    public var delegate: PhotoBrowserDelegate!
+    @objc public var delegate: PhotoBrowserDelegate!
     
-    public var photos = [Photo]() {
+    @objc public var photos = [Photo]() {
         didSet {
             
             let count = photos.count
@@ -158,6 +139,7 @@ public class PhotoBrowser: UIView {
             if index >= 0 && index < count {
                 correctIndex()
                 updateStatus(photo: photos[index])
+                delegate.photoBrowserDidChange(photo: photos[index], index: index)
             }
             else {
                 hideIndicator()
@@ -166,8 +148,12 @@ public class PhotoBrowser: UIView {
         }
     }
     
-    public var index = -1 {
+    @objc public var index = -1 {
         didSet {
+
+            guard index != oldValue else {
+                return
+            }
             
             dotIndicator.index = index
             numberIndicator.index = index
@@ -175,12 +161,13 @@ public class PhotoBrowser: UIView {
             if index >= 0 && index < photos.count {
                 correctIndex()
                 updateStatus(photo: photos[index])
+                delegate.photoBrowserDidChange(photo: photos[index], index: index)
             }
             
         }
     }
     
-    public var pageMargin: CGFloat = 0 {
+    @objc public var pageMargin: CGFloat = 0 {
         didSet {
             flowLayout.minimumLineSpacing = pageMargin
             collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: pageMargin)
@@ -188,7 +175,7 @@ public class PhotoBrowser: UIView {
         }
     }
     
-    public var indicator = IndicatorType.none {
+    @objc public var indicator = IndicatorType.none {
         didSet {
             switch indicator {
             case .dot:
@@ -206,7 +193,7 @@ public class PhotoBrowser: UIView {
         }
     }
     
-    public convenience init(configuration: PhotoBrowserConfiguration) {
+    @objc public convenience init(configuration: PhotoBrowserConfiguration) {
         self.init()
         self.configuration = configuration
         // 在这先访问 collectionView，确保它是第一个创建
@@ -221,6 +208,43 @@ public class PhotoBrowser: UIView {
         flowLayout.invalidateLayout()
         correctIndex()
     }
+    
+    @objc public func saveImage() {
+
+        let currentIndex = index
+        let currentPage = getCurrentPage()
+        
+        guard let photo = currentPage.photo else {
+            return
+        }
+        
+        saveButton.isHidden = true
+        
+        configuration.save(
+            url: currentPage.loadedUrl,
+            image: currentPage.photoView.imageView.image!,
+            complete: { success in
+                DispatchQueue.main.async {
+                    if !success {
+                        self.saveButton.isHidden = false
+                    }
+                    self.delegate.photoBrowserDidSave(photo: photo, index: currentIndex, success: success)
+                }
+            }
+        )
+        
+    }
+    
+    @objc public func detectQRCode(callback: @escaping (String) -> Void) {
+        
+        DispatchQueue.global(qos: .default).async {
+            let text = self.getCurrentPage().detectQRCode()
+            DispatchQueue.main.async {
+                callback(text)
+            }
+        }
+        
+    }
 
 }
 
@@ -232,6 +256,7 @@ extension PhotoBrowser: UICollectionViewDataSource {
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! PhotoPage
+        let cellIndex = indexPath.item
         let onPageUpdate: (Photo) -> Void = { photo in
             if self.isCurrentPhoto(photo) {
                 self.updateStatus(photo: photo)
@@ -243,12 +268,12 @@ extension PhotoBrowser: UICollectionViewDataSource {
         cell.onDragStart = onPageUpdate
         cell.onDragEnd = onPageUpdate
         cell.onTap = { photo in
-            self.delegate.photoBrowserDidTap(photo: photo)
+            self.delegate.photoBrowserDidTap(photo: photo, index: cellIndex)
         }
         cell.onLongPress = { photo in
-            self.delegate.photoBrowserDidLongPress(photo: photo)
+            self.delegate.photoBrowserDidLongPress(photo: photo, index: cellIndex)
         }
-        cell.update(photo: photos[indexPath.item], configuration: configuration)
+        cell.update(photo: photos[cellIndex], configuration: configuration)
         return cell
     }
 
@@ -265,7 +290,7 @@ extension PhotoBrowser: UICollectionViewDelegate {
 extension PhotoBrowser {
  
     private func correctIndex() {
-        if index != getActualIndex() {
+        if collectionView.bounds.width > 0 && index != getActualIndex() {
             collectionView.scrollToItem(at: IndexPath(item: index, section: 0), at: .left, animated: false)
         }
     }
@@ -326,7 +351,7 @@ extension PhotoBrowser {
         }
     }
     
-    public enum IndicatorType {
+    @objc public enum IndicatorType: Int {
         case dot, number, none
     }
     

@@ -3,14 +3,22 @@ import Foundation
 import UIKit
 import Photos
 
-class Configuration: PhotoBrowserConfiguration {
+@objc class RNTPhotoBrowserConfiguration: PhotoBrowserConfiguration {
+
+    @objc public static var isImageLoaded: ((String) -> Bool)!
+    
+    @objc public static var loadImage: ((UIImageView, String, @escaping (Bool) -> Void, @escaping (Int, Int) -> Void, @escaping (UIImage?) -> Void) -> Void)!
+
+    @objc public static var getImageCachePath: ((String) -> String)!
+
+    @objc public static var albumName = ""
     
     override func isLoaded(url: String) -> Bool {
-        return RNTPhotoBrowser.isImageLoaded(url)
+        return RNTPhotoBrowserConfiguration.isImageLoaded(url)
     }
     
     override func load(imageView: UIImageView, url: String, onLoadStart: @escaping (Bool) -> Void, onLoadProgress: @escaping (Int, Int) -> Void, onLoadEnd: @escaping (UIImage?) -> Void) {
-        RNTPhotoBrowser.loadImage(imageView, url, onLoadStart, onLoadProgress, onLoadEnd)
+        RNTPhotoBrowserConfiguration.loadImage(imageView, url, onLoadStart, onLoadProgress, onLoadEnd)
     }
     
     override func save(url: String, image: UIImage, complete: @escaping (Bool) -> Void) {
@@ -20,7 +28,7 @@ class Configuration: PhotoBrowserConfiguration {
         var albumIdentifier = ""
         var photoIdentifier: String? = nil
         
-        let albumName = RNTPhotoBrowser.albumName
+        let albumName = RNTPhotoBrowserConfiguration.albumName
         
         for i in 0..<fetchResult.count {
             if fetchResult[i].localizedTitle == albumName {
@@ -32,7 +40,7 @@ class Configuration: PhotoBrowserConfiguration {
         let addPhoto = {
             PHPhotoLibrary.shared().performChanges({
                 
-                let path = RNTPhotoBrowser.getImageCachePath(url)
+                let path = RNTPhotoBrowserConfiguration.getImageCachePath(url)
                 
                 photoIdentifier = PHAssetCreationRequest.creationRequestForAssetFromImage(atFileURL: URL(fileURLWithPath: path))?.placeholderForCreatedAsset?.localIdentifier
                 
@@ -75,46 +83,4 @@ class Configuration: PhotoBrowserConfiguration {
 
     }
     
-}
-
-func formatPhoto(data: [String: String]) -> Photo {
-    
-    let thumbnailUrl = data["thumbnailUrl"]!
-    let highQualityUrl = data["highQualityUrl"]!
-    let rawUrl = data["rawUrl"]!
-    
-    return Photo(thumbnailUrl: thumbnailUrl, highQualityUrl: highQualityUrl, rawUrl: rawUrl)
-    
-}
-
-@objc class RNTPhotoBrowser: NSObject {
-    
-    @objc public static var isImageLoaded: ((String) -> Bool)!
-    
-    @objc public static var loadImage: ((UIImageView, String, @escaping (Bool) -> Void, @escaping (Int, Int) -> Void, @escaping (UIImage?) -> Void) -> Void)!
-    
-    @objc public static var getImageCachePath: ((String) -> String)!
-    
-    @objc public static var albumName = ""
-
-    @objc public static var open: ([[String: String]], Int, String, Int) -> Void = { list, index, indicator, pageMargin in
-        
-        DispatchQueue.main.async {
-            
-            var indicatorType = PhotoBrowser.IndicatorType.none
-            if indicator == "dot" {
-                indicatorType = .dot
-            }
-            else if indicator == "number" {
-                indicatorType = .number
-            }
-            
-            PhotoBrowserViewController(configuration: Configuration(), indicator: indicatorType, pageMargin: CGFloat(pageMargin)).show(photos: list.map {
-                return formatPhoto(data: $0)
-            }, index: index)
-            
-        }
-        
-    }
-
 }

@@ -12,25 +12,21 @@ RCT_EXPORT_MODULE()
 }
 
 RCT_CUSTOM_VIEW_PROPERTY(borderRadius, int, RNTThumbnailView) {
-    int value = [RCTConvert int:json];
-    view.imageView.layer.cornerRadius = value;
+    view.imageView.layer.cornerRadius = [RCTConvert int:json];
 }
 
 RCT_CUSTOM_VIEW_PROPERTY(uri, NSString, RNTThumbnailView) {
-    NSString *value = [RCTConvert NSString:json];
-    view.url = value;
+    view.url = [RCTConvert NSString:json];
     [view refreshIfNeeded];
 }
 
 RCT_CUSTOM_VIEW_PROPERTY(width, int, RNTThumbnailView) {
-    int value = [RCTConvert int:json];
-    view.width = value;
+    view.width = [RCTConvert int:json];
     [view refreshIfNeeded];
 }
 
 RCT_CUSTOM_VIEW_PROPERTY(height, int, RNTThumbnailView) {
-    int value = [RCTConvert int:json];
-    view.height = value;
+    view.height = [RCTConvert int:json];
     [view refreshIfNeeded];
 }
 
