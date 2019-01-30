@@ -85,7 +85,7 @@ RCT_EXPORT_METHOD(detect:(nonnull NSNumber *)reactTag) {
     [self.bridge.uiManager addUIBlock:^(RCTUIManager *uiManager, NSDictionary<NSNumber *,UIView *> *viewRegistry) {
         RNTPhotoBrowser *view = (RNTPhotoBrowser *)viewRegistry[reactTag];
         [view.photoBrowser detectQRCodeWithCallback:^(NSString *text) {
-            view.onDetectResult(@{
+            view.onDetectComplete(@{
                                   @"text": text
                                   });
         }];
@@ -95,8 +95,7 @@ RCT_EXPORT_METHOD(detect:(nonnull NSNumber *)reactTag) {
 
 RCT_EXPORT_VIEW_PROPERTY(onTap, RCTBubblingEventBlock);
 RCT_EXPORT_VIEW_PROPERTY(onLongPress, RCTBubblingEventBlock);
-RCT_EXPORT_VIEW_PROPERTY(onSave, RCTBubblingEventBlock);
-RCT_EXPORT_VIEW_PROPERTY(onChange, RCTBubblingEventBlock);
-RCT_EXPORT_VIEW_PROPERTY(onDetectResult, RCTBubblingEventBlock);
+RCT_EXPORT_VIEW_PROPERTY(onSaveComplete, RCTBubblingEventBlock);
+RCT_EXPORT_VIEW_PROPERTY(onDetectComplete, RCTBubblingEventBlock);
 
 @end

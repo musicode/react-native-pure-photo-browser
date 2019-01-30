@@ -200,17 +200,6 @@ public class RNTPhotoBrowserManager extends SimpleViewManager<RNTPhotoBrowser> {
             @Override
             public void onChange(@NotNull Photo photo, int i) {
 
-                WritableMap map = Arguments.createMap();
-                map.putString("thumbnailUrl", photo.getThumbnailUrl());
-                map.putString("highQualityUrl", photo.getHighQualityUrl());
-                map.putString("rawUrl", photo.getRawUrl());
-
-                WritableMap event = Arguments.createMap();
-                event.putInt("index", i);
-                event.putMap("photo", map);
-
-                sendMessage(view, "onChange", event);
-
             }
 
             @Override
@@ -273,7 +262,7 @@ public class RNTPhotoBrowserManager extends SimpleViewManager<RNTPhotoBrowser> {
                 event.putMap("photo", map);
                 event.putBoolean("success", b);
 
-                sendMessage(view, "onSave", event);
+                sendMessage(view, "onSaveComplete", event);
 
             }
         };
@@ -328,9 +317,8 @@ public class RNTPhotoBrowserManager extends SimpleViewManager<RNTPhotoBrowser> {
         return MapBuilder.builder()
                 .put("onTap", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onTap")))
                 .put("onLongPress", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onLongPress")))
-                .put("onSave", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onSave")))
-                .put("onChange", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onChange")))
-                .put("onDetectResult", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onDetectResult")))
+                .put("onSaveComplete", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onSaveComplete")))
+                .put("onDetectComplete", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onDetectComplete")))
                 .build();
     }
 
@@ -355,7 +343,7 @@ public class RNTPhotoBrowserManager extends SimpleViewManager<RNTPhotoBrowser> {
                         public Unit invoke(String s) {
                             WritableMap event = Arguments.createMap();
                             event.putString("text", s);
-                            sendMessage(root, "onDetectResult", event);
+                            sendMessage(root, "onDetectComplete", event);
                             return null;
                         }
                     }

@@ -28,9 +28,8 @@ class PhotoBrowser extends Component {
 
     onTap: PropTypes.func,
     onLongPress: PropTypes.func,
-    onSave: PropTypes.func,
-    onChange: PropTypes.func,
-    onDetectResult: PropTypes.func,
+    onSaveComplete: PropTypes.func,
+    onDetectComplete: PropTypes.func,
   }
 
   handleTap = event => {
@@ -47,24 +46,17 @@ class PhotoBrowser extends Component {
     }
   }
 
-  handleSave = event => {
-    let { onSave } = this.props
-    if (onSave) {
-      onSave(event.nativeEvent)
+  handleSaveComplete = event => {
+    let { onSaveComplete } = this.props
+    if (onSaveComplete) {
+      onSaveComplete(event.nativeEvent)
     }
   }
 
-  handleChange = event => {
-    let { onChange } = this.props
-    if (onChange) {
-      onChange(event.nativeEvent)
-    }
-  }
-
-  handleDetectResult = event => {
-    let { onDetectResult } = this.props
-    if (onDetectResult) {
-      onDetectResult(event.nativeEvent)
+  handleDetectComplete = event => {
+    let { onDetectComplete } = this.props
+    if (onDetectComplete) {
+      onDetectComplete(event.nativeEvent)
     }
   }
 
@@ -118,9 +110,8 @@ class PhotoBrowser extends Component {
         style={style}
         onTap={this.handleTap}
         onLongPress={this.handleLongPress}
-        onSave={this.handleSave}
-        onChange={this.handleChange}
-        onDetectResult={this.handleDetectResult}
+        onSaveComplete={this.handleSaveComplete}
+        onDetectComplete={this.handleDetectComplete}
       />
     )
   }

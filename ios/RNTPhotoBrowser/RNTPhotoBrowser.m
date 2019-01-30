@@ -46,7 +46,7 @@
 }
 
 - (void)photoBrowserDidSaveWithPhoto:(Photo *)photo index:(NSInteger)index success:(BOOL)success {
-    self.onSave(@{
+    self.onSaveComplete(@{
                   @"index": @(index),
                   @"photo": @{
                           @"thumbnailUrl": photo.thumbnailUrl,
@@ -59,14 +59,7 @@
 }
 
 - (void)photoBrowserDidChangeWithPhoto:(Photo * _Nonnull)photo index:(NSInteger)index {
-    self.onChange(@{
-                  @"index": @(index),
-                  @"photo": @{
-                          @"thumbnailUrl": photo.thumbnailUrl,
-                          @"hightQualityUrl": photo.highQualityUrl,
-                          @"rawQualityUrl": photo.rawUrl,
-                          }
-                  });
+
 }
 
 @end

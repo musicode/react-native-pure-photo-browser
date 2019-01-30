@@ -8,8 +8,7 @@
 
 @property (nonatomic, copy) RCTBubblingEventBlock onTap;
 @property (nonatomic, copy) RCTBubblingEventBlock onLongPress;
-@property (nonatomic, copy) RCTBubblingEventBlock onSave;
-@property (nonatomic, copy) RCTBubblingEventBlock onChange;
-@property (nonatomic, copy) RCTBubblingEventBlock onDetectResult;
+@property (nonatomic, copy) RCTBubblingEventBlock onSaveComplete;
+@property (nonatomic, copy) RCTBubblingEventBlock onDetectComplete;
 
 @end
