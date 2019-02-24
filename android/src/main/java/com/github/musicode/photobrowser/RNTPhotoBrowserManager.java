@@ -114,7 +114,7 @@ public class RNTPhotoBrowserManager extends SimpleViewManager<RNTPhotoBrowser> {
             @Override
             public boolean save(String url, Drawable drawable) {
 
-                String fileName = URLUtil.guessFileName(url, null, null);
+                String fileName = URLUtil.guessFileName(url, null, null).toLowerCase();
 
                 File albumDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
                 if (!albumName.isEmpty()) {
