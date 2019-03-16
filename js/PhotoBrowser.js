@@ -1,5 +1,5 @@
 import React, {
-  Component,
+  PureComponent,
 } from 'react'
 
 import ReactNative, {
@@ -16,7 +16,7 @@ const { RNTPhotoBrowserManager } = NativeModules
 
 const isIOS = Platform.OS === 'ios'
 
-class PhotoBrowser extends Component {
+class PhotoBrowser extends PureComponent {
 
   static propTypes = {
     list: PropTypes.array.isRequired,

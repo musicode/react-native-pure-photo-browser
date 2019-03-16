@@ -1,5 +1,5 @@
 import React, {
-  Component,
+  PureComponent,
 } from 'react'
 
 import {
@@ -9,7 +9,7 @@ import {
 
 import PropTypes from 'prop-types'
 
-class ThumbnailView extends Component {
+class ThumbnailView extends PureComponent {
 
   static propTypes = {
     uri: PropTypes.string.isRequired,
