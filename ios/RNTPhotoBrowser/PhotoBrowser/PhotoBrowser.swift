@@ -78,7 +78,7 @@ public class PhotoBrowser: UIView {
     private lazy var rawButton: SimpleButton = {
         
         let view = SimpleButton()
-        
+
         view.setImage(configuration.rawButtonImage, for: .normal)
         
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -91,7 +91,9 @@ public class PhotoBrowser: UIView {
         
         addConstraints([
             NSLayoutConstraint(item: view, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: -configuration.rawButtonMarginBottom),
-            NSLayoutConstraint(item: view, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0)
+            NSLayoutConstraint(item: view, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: view, attribute: .width, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .width, multiplier: 1, constant: configuration.rawButtonMinWidth),
+            NSLayoutConstraint(item: view, attribute: .height, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .height, multiplier: 1, constant: configuration.rawButtonMinHeight)
         ])
         
         return view
@@ -114,7 +116,9 @@ public class PhotoBrowser: UIView {
         
         addConstraints([
             NSLayoutConstraint(item: view, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: -configuration.saveButtonMarginBottom),
-            NSLayoutConstraint(item: view, attribute: .right, relatedBy: .equal, toItem: self, attribute: .right, multiplier: 1, constant: -configuration.saveButtonMarginRight)
+            NSLayoutConstraint(item: view, attribute: .right, relatedBy: .equal, toItem: self, attribute: .right, multiplier: 1, constant: -configuration.saveButtonMarginRight),
+            NSLayoutConstraint(item: view, attribute: .width, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .width, multiplier: 1, constant: configuration.saveButtonMinWidth),
+            NSLayoutConstraint(item: view, attribute: .height, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .height, multiplier: 1, constant: configuration.saveButtonMinHeight)
         ])
         
         return view

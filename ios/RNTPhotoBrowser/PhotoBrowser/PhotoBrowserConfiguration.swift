@@ -43,11 +43,23 @@ import UIKit
     // 查看原图按钮的标题
     @objc public var rawButtonImage = UIImage(named: "photo_browser_raw")
     
+    // 查看原图按钮的最小宽度
+    @objc public var rawButtonMinWidth: CGFloat = 44
+    
+    // 查看原图按钮的最小高度
+    @objc public var rawButtonMinHeight: CGFloat = 44
+    
     // 查看原图按钮到底部的距离
     @objc public var rawButtonMarginBottom: CGFloat = 40
     
     // 保存按钮的图标
     @objc public var saveButtonImage = UIImage(named: "photo_browser_save")
+    
+    // 保存按钮的最小宽度
+    @objc public var saveButtonMinWidth: CGFloat = 44
+    
+    // 保存按钮的最小高度
+    @objc public var saveButtonMinHeight: CGFloat = 44
     
     // 保存按钮到底部的距离
     @objc public var saveButtonMarginBottom: CGFloat = 40
