@@ -79,7 +79,7 @@ public class RNTPhotoBrowserManager extends SimpleViewManager<RNTPhotoBrowser> {
         configuration = new PhotoBrowserConfiguration() {
             @Override
             public void load(ImageView imageView, String url, final Function1<? super Boolean, Unit> onLoadStart, final Function2<? super Float, ? super Float, Unit> onLoadProgress, final Function1<? super Boolean, Unit> onLoadEnd) {
-                loader.load(imageView, url, 0, 0, new RNTPhotoBrowserListenr() {
+                loader.load(imageView, url, 0, 0, new RNTPhotoBrowserListener() {
                     @Override
                     public void onLoadStart(boolean hasProgress) {
                         onLoadStart.invoke(hasProgress);

@@ -1,6 +1,6 @@
 package com.github.musicode.photobrowser;
 
-public interface RNTPhotoBrowserListenr {
+public interface RNTPhotoBrowserListener {
 
     void onLoadStart(boolean hasProgress);
 
