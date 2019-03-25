@@ -1,6 +1,6 @@
 {
   "name": "react-native-pure-photo-browser",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "react native photo browser",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,7 @@
     "photo browser"
   ],
   "author": "musicode",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/musicode/react-native-pure-photo-browser/issues"
   },
