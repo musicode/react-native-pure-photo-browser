@@ -1,6 +1,6 @@
 
 #import "RNTThumbnailViewManager.h"
-#import "RNTPhotoBrowser-Swift.h"
+#import "react_native_pure_photo_browser-Swift.h"
 #import "RNTThumbnailView.h"
 
 @implementation RNTThumbnailViewManager

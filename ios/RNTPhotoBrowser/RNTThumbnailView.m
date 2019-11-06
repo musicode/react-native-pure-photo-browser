@@ -1,6 +1,6 @@
 
 #import "RNTThumbnailView.h"
-#import "RNTPhotoBrowser-Swift.h"
+#import "react_native_pure_photo_browser-Swift.h"
 
 @implementation RNTThumbnailView
 
@@ -26,7 +26,7 @@
 - (void)refreshIfNeeded {
     if (self.width > 0 && self.height > 0 && self.url.length > 0 && self.isAlive && self.imageView != nil) {
         typeof(self) __weak __weak_self__ = self;
-        
+
         RNTPhotoBrowserConfiguration.loadImage(self.imageView, self.url, self.width, self.height, ^(BOOL hasProgress) {
 
             typeof(__weak_self__) __strong self = __weak_self__;

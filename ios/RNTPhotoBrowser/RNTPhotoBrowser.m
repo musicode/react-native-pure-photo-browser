@@ -1,6 +1,6 @@
 
 #import "RNTPhotoBrowser.h"
-#import "RNTPhotoBrowser-Swift.h"
+#import "react_native_pure_photo_browser-Swift.h"
 
 @interface RNTPhotoBrowser()<PhotoBrowserDelegate>
 

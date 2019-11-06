@@ -3,7 +3,7 @@ import Foundation
 import UIKit
 import Photos
 
-@objc class RNTPhotoBrowserConfiguration: PhotoBrowserConfiguration {
+@objc public class RNTPhotoBrowserConfiguration: PhotoBrowserConfiguration {
 
     @objc public static var isImageLoaded: ((String) -> Bool)!
     
@@ -13,15 +13,15 @@ import Photos
 
     @objc public static var albumName = ""
     
-    override func isLoaded(url: String) -> Bool {
+    override public func isLoaded(url: String) -> Bool {
         return RNTPhotoBrowserConfiguration.isImageLoaded(url)
     }
     
-    override func load(imageView: UIImageView, url: String, onLoadStart: @escaping (Bool) -> Void, onLoadProgress: @escaping (Int, Int) -> Void, onLoadEnd: @escaping (UIImage?) -> Void) {
+    override public func load(imageView: UIImageView, url: String, onLoadStart: @escaping (Bool) -> Void, onLoadProgress: @escaping (Int, Int) -> Void, onLoadEnd: @escaping (UIImage?) -> Void) {
         RNTPhotoBrowserConfiguration.loadImage(imageView, url, 0, 0, onLoadStart, onLoadProgress, onLoadEnd)
     }
     
-    override func save(url: String, image: UIImage, complete: @escaping (Bool) -> Void) {
+    override public func save(url: String, image: UIImage, complete: @escaping (Bool) -> Void) {
         
         let fetchResult = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .albumRegular, options: nil)
         var album: PHAssetCollection? = nil

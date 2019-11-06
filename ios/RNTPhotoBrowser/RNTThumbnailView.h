@@ -1,6 +1,5 @@
 
 #import <React/RCTViewManager.h>
-#import "RNTPhotoBrowser-Swift.h"
 
 @interface RNTThumbnailView : UIView
 
