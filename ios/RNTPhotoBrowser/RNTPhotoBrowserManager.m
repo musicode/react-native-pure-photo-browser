@@ -25,33 +25,32 @@
 
 RCT_EXPORT_MODULE()
 
-- (UIView *)view {
+- (RNTPhotoBrowser *)view {
     return [RNTPhotoBrowser new];
 }
 
 RCT_CUSTOM_VIEW_PROPERTY(indicator, int, RNTPhotoBrowser) {
     int value = [RCTConvert int:json];
-    PhotoBrowser* photoBrowser = (PhotoBrowser *)view.photoBrowser;
-    
+
     // 1 是 dot
     if (value == 1) {
-        photoBrowser.indicator = 0;
+        view.photoBrowser.indicator = 0;
     }
     // 2 是 number
     else if (value == 2) {
-        photoBrowser.indicator = 1;
+        view.photoBrowser.indicator = 1;
     }
     else {
-        photoBrowser.indicator = 2;
+        view.photoBrowser.indicator = 2;
     }
 }
 
 RCT_CUSTOM_VIEW_PROPERTY(pageMargin, int, RNTPhotoBrowser) {
-    ((PhotoBrowser *)view.photoBrowser).pageMargin = [RCTConvert int:json];
+    view.photoBrowser.pageMargin = [RCTConvert int:json];
 }
 
 RCT_CUSTOM_VIEW_PROPERTY(index, int, RNTPhotoBrowser) {
-    ((PhotoBrowser *)view.photoBrowser).index = [RCTConvert int:json];
+    view.photoBrowser.index = [RCTConvert int:json];
 }
 
 RCT_CUSTOM_VIEW_PROPERTY(list, NSArray, RNTPhotoBrowser) {
@@ -72,21 +71,21 @@ RCT_CUSTOM_VIEW_PROPERTY(list, NSArray, RNTPhotoBrowser) {
 
     }
 
-    ((PhotoBrowser *)view.photoBrowser).photos = photos;
+    view.photoBrowser.photos = photos;
 
 }
 
 RCT_EXPORT_METHOD(save:(nonnull NSNumber *)reactTag) {
     [self.bridge.uiManager addUIBlock:^(RCTUIManager *uiManager, NSDictionary<NSNumber *,UIView *> *viewRegistry) {
         RNTPhotoBrowser *view = (RNTPhotoBrowser *)viewRegistry[reactTag];
-        [((PhotoBrowser *)view.photoBrowser) saveImage];
+        [view.photoBrowser saveImage];
     }];
 }
 
 RCT_EXPORT_METHOD(detect:(nonnull NSNumber *)reactTag) {
     [self.bridge.uiManager addUIBlock:^(RCTUIManager *uiManager, NSDictionary<NSNumber *,UIView *> *viewRegistry) {
         RNTPhotoBrowser *view = (RNTPhotoBrowser *)viewRegistry[reactTag];
-        [((PhotoBrowser *)view.photoBrowser) detectQRCodeWithCallback:^(NSString *text) {
+        [view.photoBrowser detectQRCodeWithCallback:^(NSString *text) {
             view.onDetectComplete(@{
                                   @"text": text
                                   });

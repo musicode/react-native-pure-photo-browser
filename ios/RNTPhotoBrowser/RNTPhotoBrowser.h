@@ -1,9 +1,11 @@
 
 #import <React/RCTViewManager.h>
 
+@class PhotoBrowser;
+
 @interface RNTPhotoBrowser : UIView
 
-@property (nonatomic, weak) UIView *photoBrowser;
+@property (nonatomic, weak) PhotoBrowser *photoBrowser;
 
 @property (nonatomic, copy) RCTBubblingEventBlock onTap;
 @property (nonatomic, copy) RCTBubblingEventBlock onLongPress;

@@ -1,6 +1,6 @@
 {
   "name": "react-native-pure-photo-browser",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "react native photo browser",
   "main": "index.js",
   "scripts": {
