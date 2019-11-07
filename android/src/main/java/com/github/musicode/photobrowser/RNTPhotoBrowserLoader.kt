@@ -7,7 +7,7 @@ import java.nio.ByteBuffer
 
 interface RNTPhotoBrowserLoader {
 
-    fun getImageBuffer(drawable: Drawable): ByteBuffer
+    fun getImageBuffer(drawable: Drawable): ByteBuffer?
 
     fun getImageCachePath(url: String, callback: (String) -> Unit)
 

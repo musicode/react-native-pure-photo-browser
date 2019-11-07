@@ -242,7 +242,7 @@ class RNTPhotoBrowserManager(private val reactContext: ReactApplicationContext) 
                     val fileName = URLUtil.guessFileName(url, null, null).toLowerCase()
 
                     var albumDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-                    if (!albumName.isEmpty()) {
+                    if (albumName.isNotEmpty()) {
                         albumDir = File(albumDir, albumName)
                         if (!albumDir.exists()) {
                             albumDir.mkdir()
@@ -275,9 +275,11 @@ class RNTPhotoBrowserManager(private val reactContext: ReactApplicationContext) 
                             drawable.bitmap.compress(format, 100, outputStream)
                         } else {
                             val buffer = loader.getImageBuffer(drawable)
-                            val bytes = ByteArray(buffer.capacity())
-                            (buffer.duplicate().clear() as ByteBuffer).get(bytes)
-                            outputStream.write(bytes, 0, bytes.size)
+                            if (buffer != null) {
+                                val bytes = ByteArray(buffer.capacity())
+                                (buffer.duplicate().clear() as ByteBuffer).get(bytes)
+                                outputStream.write(bytes, 0, bytes.size)
+                            }
                         }
 
                         outputStream.close()
