@@ -23,25 +23,32 @@ import Photos
     
     override public func save(url: String, image: UIImage, complete: @escaping (Bool) -> Void) {
         
-        let fetchResult = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .albumRegular, options: nil)
+        let path = RNTPhotoBrowserConfiguration.getImageCachePath(url)
+        
+        RNTPhotoBrowserConfiguration.save(path: path, complete: complete)
+
+    }
+    
+    @objc public static func save(path: String, complete: @escaping (Bool) -> Void) {
+        
         var album: PHAssetCollection? = nil
         var albumIdentifier = ""
         var photoIdentifier: String? = nil
         
         let albumName = RNTPhotoBrowserConfiguration.albumName
-        
-        for i in 0..<fetchResult.count {
-            if fetchResult[i].localizedTitle == albumName {
-                album = fetchResult[i]
-                break
+        if albumName.count > 0 {
+            let fetchResult = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .albumRegular, options: nil)
+            for i in 0..<fetchResult.count {
+                if fetchResult[i].localizedTitle == albumName {
+                    album = fetchResult[i]
+                    break
+                }
             }
         }
-        
+
         let addPhoto = {
             PHPhotoLibrary.shared().performChanges({
-                
-                let path = RNTPhotoBrowserConfiguration.getImageCachePath(url)
-                
+
                 photoIdentifier = PHAssetCreationRequest.creationRequestForAssetFromImage(atFileURL: URL(fileURLWithPath: path))?.placeholderForCreatedAsset?.localIdentifier
                 
             }, completionHandler: { success, error in
@@ -80,7 +87,7 @@ import Photos
         else {
             addPhoto()
         }
-
+        
     }
     
 }

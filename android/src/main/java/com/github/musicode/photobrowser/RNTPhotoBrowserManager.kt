@@ -188,17 +188,19 @@ class RNTPhotoBrowserManager(private val reactContext: ReactApplicationContext) 
 
         private const val COMMAND_DETECT = 2
 
-        private var isScannerConnected: Boolean? = false
+        private var isScannerConnected = false
 
-        private lateinit var configuration: PhotoBrowserConfiguration
+        private lateinit var scanner: MediaScannerConnection
 
-        var albumName = ""
+        lateinit var configuration: PhotoBrowserConfiguration
 
         lateinit var imageLoader: RNTPhotoBrowserLoader
 
+        var albumName = ""
+
         fun setImageLoader(context: Context, loader: RNTPhotoBrowserLoader) {
 
-            val scanner = MediaScannerConnection(context, object : MediaScannerConnection.MediaScannerConnectionClient {
+            scanner = MediaScannerConnection(context, object : MediaScannerConnection.MediaScannerConnectionClient {
                 override fun onMediaScannerConnected() {
                     isScannerConnected = true
                 }
@@ -213,7 +215,7 @@ class RNTPhotoBrowserManager(private val reactContext: ReactApplicationContext) 
             imageLoader = loader
 
             configuration = object : PhotoBrowserConfiguration {
-                override fun load(imageView: ImageView, url: String, onLoadStart: Function1<Boolean, Unit>, onLoadProgress: Function2<Float, Float, Unit>, onLoadEnd: Function1<Boolean, Unit>) {
+                override fun load(imageView: ImageView, url: String, onLoadStart: (Boolean) -> Unit, onLoadProgress: (Float, Float) -> Unit, onLoadEnd: (Boolean) -> Unit) {
                     loader.load(imageView, url, 0, 0, object : RNTPhotoBrowserListener {
                         override fun onLoadStart(hasProgress: Boolean) {
                             onLoadStart.invoke(hasProgress)
