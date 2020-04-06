@@ -11,6 +11,6 @@ interface RNTPhotoBrowserLoader {
 
     fun getImageCachePath(url: String, callback: (String) -> Unit)
 
-    fun load(imageView: ImageView, url: String, width: Int, height: Int, listener: RNTPhotoBrowserListener)
+    fun loadImage(imageView: ImageView, url: String, width: Int, height: Int, listener: RNTPhotoBrowserListener)
 
 }

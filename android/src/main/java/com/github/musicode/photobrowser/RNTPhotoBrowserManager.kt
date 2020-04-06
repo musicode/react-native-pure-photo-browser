@@ -107,12 +107,16 @@ class RNTPhotoBrowserManager(private val reactContext: ReactApplicationContext) 
 
     @ReactProp(name = "indicator")
     fun setIndicator(view: RNTPhotoBrowser, indicator: Int) {
-        if (indicator == 1) {
-            view.indicator = PhotoBrowser.IndicatorType.DOT
-        } else if (indicator == 2) {
-            view.indicator = PhotoBrowser.IndicatorType.NUMBER
-        } else {
-            view.indicator = PhotoBrowser.IndicatorType.NONE
+        view.indicator = when (indicator) {
+            1 -> {
+                PhotoBrowser.IndicatorType.DOT
+            }
+            2 -> {
+                PhotoBrowser.IndicatorType.NUMBER
+            }
+            else -> {
+                PhotoBrowser.IndicatorType.NONE
+            }
         }
     }
 
@@ -192,13 +196,13 @@ class RNTPhotoBrowserManager(private val reactContext: ReactApplicationContext) 
 
         private lateinit var scanner: MediaScannerConnection
 
+        private var albumName = ""
+
         lateinit var configuration: PhotoBrowserConfiguration
 
         lateinit var imageLoader: RNTPhotoBrowserLoader
 
-        var albumName = ""
-
-        fun setImageLoader(context: Context, loader: RNTPhotoBrowserLoader) {
+        fun init(context: Context, name: String, loader: RNTPhotoBrowserLoader) {
 
             scanner = MediaScannerConnection(context, object : MediaScannerConnection.MediaScannerConnectionClient {
                 override fun onMediaScannerConnected() {
@@ -212,11 +216,13 @@ class RNTPhotoBrowserManager(private val reactContext: ReactApplicationContext) 
 
             scanner.connect()
 
+            albumName = name
+
             imageLoader = loader
 
             configuration = object : PhotoBrowserConfiguration {
                 override fun load(imageView: ImageView, url: String, onLoadStart: (Boolean) -> Unit, onLoadProgress: (Float, Float) -> Unit, onLoadEnd: (Boolean) -> Unit) {
-                    loader.load(imageView, url, 0, 0, object : RNTPhotoBrowserListener {
+                    loader.loadImage(imageView, url, 0, 0, object : RNTPhotoBrowserListener {
                         override fun onLoadStart(hasProgress: Boolean) {
                             onLoadStart.invoke(hasProgress)
                         }
@@ -286,7 +292,7 @@ class RNTPhotoBrowserManager(private val reactContext: ReactApplicationContext) 
 
                         outputStream.close()
 
-                        if (isScannerConnected!!) {
+                        if (isScannerConnected) {
                             scanner.scanFile(filePath, "image/*")
                             return true
                         }

@@ -18,7 +18,7 @@ class RNTThumbnailView(context: Context) : ThumbnailView(context) {
 
     internal fun refreshIfNeeded() {
         if (width > 0 && height > 0 && uri.isNotEmpty()) {
-            RNTPhotoBrowserManager.imageLoader.load(this, uri, width, height, object : RNTPhotoBrowserListener {
+            RNTPhotoBrowserManager.imageLoader.loadImage(this, uri, width, height, object : RNTPhotoBrowserListener {
                 override fun onLoadStart(hasProgress: Boolean) {
                     sendEvent("onLoadStart", null)
                 }
