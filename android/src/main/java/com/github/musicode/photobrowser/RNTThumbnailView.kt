@@ -1,14 +1,13 @@
 package com.github.musicode.photobrowser
 
-import android.content.Context
-
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.bridge.WritableMap
+import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.events.RCTEventEmitter
 import com.github.herokotlin.photoview.ThumbnailView
 
-class RNTThumbnailView(context: Context) : ThumbnailView(context) {
+class RNTThumbnailView(val context: ThemedReactContext) : ThumbnailView(context) {
 
     internal var width = 0
 
@@ -17,7 +16,12 @@ class RNTThumbnailView(context: Context) : ThumbnailView(context) {
     internal var uri = ""
 
     internal fun refreshIfNeeded() {
-        if (width > 0 && height > 0 && uri.isNotEmpty()) {
+        if (width > 0
+            && height > 0
+            && uri.isNotEmpty()
+            && context.hasCurrentActivity()
+            && context.currentActivity?.isDestroyed != true
+        ) {
             RNTPhotoBrowserManager.imageLoader.loadImage(this, uri, width, height, object : RNTPhotoBrowserListener {
                 override fun onLoadStart(hasProgress: Boolean) {
                     sendEvent("onLoadStart", null)
