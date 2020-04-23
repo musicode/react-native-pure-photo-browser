@@ -89,6 +89,7 @@ RCT_EXPORT_METHOD(detect:(nonnull NSNumber *)reactTag) {
 
 RCT_EXPORT_VIEW_PROPERTY(onTap, RCTBubblingEventBlock);
 RCT_EXPORT_VIEW_PROPERTY(onLongPress, RCTBubblingEventBlock);
+RCT_EXPORT_VIEW_PROPERTY(onSavePress, RCTBubblingEventBlock);
 RCT_EXPORT_VIEW_PROPERTY(onSaveComplete, RCTBubblingEventBlock);
 RCT_EXPORT_VIEW_PROPERTY(onDetectComplete, RCTBubblingEventBlock);
 

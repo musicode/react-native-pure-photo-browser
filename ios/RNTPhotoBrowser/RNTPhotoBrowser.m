@@ -45,6 +45,19 @@
                        });
 }
 
+- (void)photoBrowserDidSavePressWithPhoto:(Photo *)photo index:(NSInteger)index {
+    self.onSavePress(@{
+                        @"index": @(index),
+                        @"photo": @{
+                                @"thumbnailUrl": photo.thumbnailUrl,
+                                @"hightQualityUrl": photo.highQualityUrl,
+                                @"rawQualityUrl": photo.rawUrl,
+                                @"currentUrl": photo.currentUrl,
+                                @"currentPath": RNTPhotoBrowserConfiguration.getImageCachePath(photo.currentUrl)
+                                }
+                        });
+}
+
 - (void)photoBrowserDidSaveWithPhoto:(Photo *)photo index:(NSInteger)index success:(BOOL)success {
     self.onSaveComplete(@{
                   @"index": @(index),

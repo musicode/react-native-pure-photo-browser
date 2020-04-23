@@ -85,6 +85,28 @@ class RNTPhotoBrowserManager(private val reactContext: ReactApplicationContext) 
 
             }
 
+            override fun onSavePress(photo: Photo, index: Int) {
+
+                imageLoader.getImageCachePath(
+                        photo.currentUrl
+                ) { path ->
+                    val map = Arguments.createMap()
+                    map.putString("thumbnailUrl", photo.thumbnailUrl)
+                    map.putString("highQualityUrl", photo.highQualityUrl)
+                    map.putString("rawUrl", photo.rawUrl)
+                    map.putString("currentUrl", photo.currentUrl)
+                    map.putString("currentPath", path)
+
+                    val event = Arguments.createMap()
+                    event.putInt("index", index)
+                    event.putMap("photo", map)
+
+                    sendMessage(view, "onSavePress", event)
+
+                }
+
+            }
+
             override fun onSave(photo: Photo, index: Int, success: Boolean) {
 
                 val map = Arguments.createMap()
@@ -154,6 +176,7 @@ class RNTPhotoBrowserManager(private val reactContext: ReactApplicationContext) 
         return MapBuilder.builder<String, Any>()
                 .put("onTap", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onTap")))
                 .put("onLongPress", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onLongPress")))
+                .put("onSavePress", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onSavePress")))
                 .put("onSaveComplete", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onSaveComplete")))
                 .put("onDetectComplete", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onDetectComplete")))
                 .build()

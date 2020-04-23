@@ -109,7 +109,7 @@ public class PhotoBrowser: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         
         view.onClick = {
-            self.saveImage()
+            self.delegate.photoBrowserDidSavePress(photo: self.photos[self.index], index: self.index)
         }
         
         addSubview(view)

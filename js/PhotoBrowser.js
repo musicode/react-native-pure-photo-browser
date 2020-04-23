@@ -28,6 +28,7 @@ class PhotoBrowser extends PureComponent {
 
     onTap: PropTypes.func,
     onLongPress: PropTypes.func,
+    onSavePress: PropTypes.func,
     onSaveComplete: PropTypes.func,
     onDetectComplete: PropTypes.func,
   }
@@ -43,6 +44,13 @@ class PhotoBrowser extends PureComponent {
     let { onLongPress } = this.props
     if (onLongPress) {
       onLongPress(event.nativeEvent)
+    }
+  }
+
+  handleSavePress = event => {
+    let { onSavePress } = this.props
+    if (onSavePress) {
+      onSavePress(event.nativeEvent)
     }
   }
 
@@ -110,6 +118,7 @@ class PhotoBrowser extends PureComponent {
         style={style}
         onTap={this.handleTap}
         onLongPress={this.handleLongPress}
+        onSavePress={this.handleSavePress}
         onSaveComplete={this.handleSaveComplete}
         onDetectComplete={this.handleDetectComplete}
       />

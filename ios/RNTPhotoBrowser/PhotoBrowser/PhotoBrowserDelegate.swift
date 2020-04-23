@@ -15,6 +15,9 @@ import Foundation
     // 长按图片
     func photoBrowserDidLongPress(photo: Photo, index: Int)
     
+    // 点击保存按钮
+    func photoBrowserDidSavePress(photo: Photo, index: Int)
+    
 }
 
 public extension PhotoBrowserDelegate {
@@ -26,6 +29,8 @@ public extension PhotoBrowserDelegate {
     func photoBrowserDidTap(photo: Photo, index: Int) { }
     
     func photoBrowserDidLongPress(photo: Photo, index: Int) { }
+    
+    func photoBrowserDidSavePress(photo: Photo, index: Int) { }
     
 }
 
