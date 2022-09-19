@@ -5,7 +5,6 @@ import React, {
 import ReactNative, {
   UIManager,
   requireNativeComponent,
-  ViewPropTypes,
   NativeModules,
   Platform,
 } from 'react-native'
@@ -24,7 +23,7 @@ class PhotoBrowser extends PureComponent {
     indicator: PropTypes.number.isRequired,
     pageMargin: PropTypes.number.isRequired,
 
-    style: ViewPropTypes.style,
+    style: PropTypes.any,
 
     onTap: PropTypes.func,
     onLongPress: PropTypes.func,

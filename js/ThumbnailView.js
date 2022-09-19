@@ -4,7 +4,6 @@ import React, {
 
 import {
   requireNativeComponent,
-  ViewPropTypes,
 } from 'react-native'
 
 import PropTypes from 'prop-types'
@@ -16,7 +15,7 @@ class ThumbnailView extends PureComponent {
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
     borderRadius: PropTypes.number,
-    style: ViewPropTypes.style,
+    style: PropTypes.any,
 
     onLoadStart: PropTypes.func,
     onLoadProgress: PropTypes.func,
