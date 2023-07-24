@@ -19,6 +19,9 @@ import UIKit
     // 当前显示的 url
     @objc public var currentUrl = ""
     
+    // 是否显示保存按钮，比如有些敏感图片不可以保存
+    @objc public var canSave = false
+    
     // 记录当前是否需要显示查看原图按钮
     var isRawButtonVisible = false
     
@@ -37,10 +40,11 @@ import UIKit
     // 记录当前的缩放值
     var scale: CGFloat = 1
 
-    @objc public init(thumbnailUrl: String, highQualityUrl: String, rawUrl: String) {
+    @objc public init(thumbnailUrl: String, highQualityUrl: String, rawUrl: String, canSave: Bool) {
         self.thumbnailUrl = thumbnailUrl
         self.highQualityUrl = highQualityUrl
         self.rawUrl = rawUrl
+        self.canSave = canSave
     }
 
 }

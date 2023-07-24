@@ -57,8 +57,9 @@ RCT_CUSTOM_VIEW_PROPERTY(list, NSArray, RNTPhotoBrowser) {
         NSString *thumbnailUrl = [RCTConvert NSString:item[@"thumbnailUrl"]];
         NSString *highQualityUrl = [RCTConvert NSString:item[@"highQualityUrl"]];
         NSString *rawUrl = [RCTConvert NSString:item[@"rawUrl"]];
+        BOOL canSave = [RCTConvert BOOL:item[@"canSave"]];
 
-        Photo *photo = [[Photo alloc] initWithThumbnailUrl:thumbnailUrl highQualityUrl:highQualityUrl rawUrl:rawUrl];
+        Photo *photo = [[Photo alloc] initWithThumbnailUrl:thumbnailUrl highQualityUrl:highQualityUrl rawUrl:rawUrl canSave:canSave];
 
         [photos addObject:photo];
 

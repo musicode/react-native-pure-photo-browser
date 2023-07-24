@@ -28,6 +28,7 @@
                          @"hightQualityUrl": photo.highQualityUrl,
                          @"rawQualityUrl": photo.rawUrl,
                          @"currentUrl": photo.currentUrl,
+                         @"canSave": @(photo.canSave),
                          }
                  });
 }
@@ -40,7 +41,8 @@
                                @"hightQualityUrl": photo.highQualityUrl,
                                @"rawQualityUrl": photo.rawUrl,
                                @"currentUrl": photo.currentUrl,
-                               @"currentPath": RNTPhotoBrowserConfiguration.getImageCachePath(photo.currentUrl)
+                               @"currentPath": RNTPhotoBrowserConfiguration.getImageCachePath(photo.currentUrl),
+                               @"canSave": @(photo.canSave),
                                }
                        });
 }
@@ -53,7 +55,8 @@
                                 @"hightQualityUrl": photo.highQualityUrl,
                                 @"rawQualityUrl": photo.rawUrl,
                                 @"currentUrl": photo.currentUrl,
-                                @"currentPath": RNTPhotoBrowserConfiguration.getImageCachePath(photo.currentUrl)
+                                @"currentPath": RNTPhotoBrowserConfiguration.getImageCachePath(photo.currentUrl),
+                                @"canSave": @(photo.canSave),
                                 }
                         });
 }
@@ -66,6 +69,7 @@
                           @"hightQualityUrl": photo.highQualityUrl,
                           @"rawQualityUrl": photo.rawUrl,
                           @"currentUrl": photo.currentUrl,
+                          @"canSave": @(photo.canSave),
                           },
                   @"success": @(success)
                   });

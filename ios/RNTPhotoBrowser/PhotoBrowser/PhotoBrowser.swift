@@ -304,7 +304,7 @@ extension PhotoBrowser {
     }
     
     private func isCurrentPhoto(_ photo: Photo) -> Bool {
-        guard let index = photos.index(where: { $0 === photo }) else {
+        guard let index = photos.firstIndex(where: { $0 === photo }) else {
             return false
         }
         return index == self.index
