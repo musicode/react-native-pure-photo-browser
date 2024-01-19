@@ -197,7 +197,7 @@ class RNTPhotoBrowserManager(private val reactContext: ReactApplicationContext) 
     override fun receiveCommand(root: RNTPhotoBrowser, commandId: Int, args: ReadableArray?) {
         when (commandId) {
             COMMAND_SAVE -> root.saveImage()
-            COMMAND_DETECT -> root.detectQRCode { s ->
+            COMMAND_DETECT -> root.decodeQRCode { s ->
                 val event = Arguments.createMap()
                 event.putString("text", s)
                 sendMessage(root, "onDetectComplete", event)
