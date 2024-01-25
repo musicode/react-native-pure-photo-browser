@@ -275,7 +275,7 @@ class RNTPhotoBrowserManager(private val reactContext: ReactApplicationContext) 
 
                 override fun save(url: String, drawable: Drawable): Boolean {
 
-                    val fileName = URLUtil.guessFileName(url, null, null).toLowerCase()
+                    val fileName = URLUtil.guessFileName(url, null, null).lowercase()
 
                     var albumDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
                     if (albumName.isNotEmpty()) {
@@ -285,7 +285,7 @@ class RNTPhotoBrowserManager(private val reactContext: ReactApplicationContext) 
                         }
                     }
 
-                    val filePath = albumDir.absolutePath + "/" + fileName
+                    val filePath = albumDir.absolutePath + File.separator + fileName
                     val image = File(filePath)
                     if (image.exists()) {
                         return true
@@ -294,21 +294,20 @@ class RNTPhotoBrowserManager(private val reactContext: ReactApplicationContext) 
                     try {
                         val outputStream = FileOutputStream(filePath)
                         if (drawable is BitmapDrawable) {
+                            val bitmap = drawable.bitmap
                             var format: Bitmap.CompressFormat = Bitmap.CompressFormat.JPEG
 
                             var extName = ""
                             val index = fileName.lastIndexOf(".")
                             if (index > 0) {
-                                extName = fileName.substring(index + 1)
+                                extName = fileName.substring(index + 1).lowercase()
                             }
 
-                            if (extName == ".png") {
+                            if (extName == "png") {
                                 format = Bitmap.CompressFormat.PNG
-                            } else if (extName == ".webp") {
-                                format = Bitmap.CompressFormat.WEBP
                             }
 
-                            drawable.bitmap.compress(format, 100, outputStream)
+                            bitmap.compress(format, 100, outputStream)
                         } else {
                             val buffer = loader.getImageBuffer(drawable)
                             if (buffer != null) {
