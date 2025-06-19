@@ -1,4 +1,5 @@
 import React, {
+  createRef,
   PureComponent,
 } from 'react'
 
@@ -31,6 +32,8 @@ class PhotoBrowser extends PureComponent {
     onSaveComplete: PropTypes.func,
     onDetectComplete: PropTypes.func,
   }
+
+  browserRef = createRef()
 
   handleTap = event => {
     let { onTap } = this.props
@@ -94,7 +97,7 @@ class PhotoBrowser extends PureComponent {
   }
 
   getNativeNode() {
-    return ReactNative.findNodeHandle(this.refs.photoBrowser);
+    return ReactNative.findNodeHandle(this.browserRef.current)
   }
 
   render() {
@@ -109,7 +112,7 @@ class PhotoBrowser extends PureComponent {
 
     return (
       <RNTPhotoBrowser
-        ref="photoBrowser"
+        ref={this.browserRef}
         index={index}
         list={list}
         indicator={indicator}
