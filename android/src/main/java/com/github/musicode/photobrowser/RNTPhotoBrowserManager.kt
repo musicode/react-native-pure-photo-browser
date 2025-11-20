@@ -16,7 +16,6 @@ import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.WritableMap
-import com.facebook.react.common.MapBuilder
 import com.facebook.react.uimanager.SimpleViewManager
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.annotations.ReactProp
@@ -178,13 +177,18 @@ class RNTPhotoBrowserManager(private val reactContext: ReactApplicationContext) 
     }
 
     override fun getExportedCustomBubblingEventTypeConstants(): MutableMap<String, Any> {
-        return MapBuilder.builder<String, Any>()
-                .put("onTap", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onTap")))
-                .put("onLongPress", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onLongPress")))
-                .put("onSavePress", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onSavePress")))
-                .put("onSaveComplete", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onSaveComplete")))
-                .put("onDetectComplete", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onDetectComplete")))
-                .build()
+        val baseEventTypeConstants = super.getExportedCustomBubblingEventTypeConstants()
+        val eventTypeConstants = baseEventTypeConstants ?: mutableMapOf()
+        eventTypeConstants.putAll(
+            mapOf(
+                "onTap" to mapOf("phasedRegistrationNames" to mapOf("bubbled" to "onTap")),
+                "onLongPress" to mapOf("phasedRegistrationNames" to mapOf("bubbled" to "onLongPress")),
+                "onSavePress" to mapOf("phasedRegistrationNames" to mapOf("bubbled" to "onSavePress")),
+                "onSaveComplete" to mapOf("phasedRegistrationNames" to mapOf("bubbled" to "onSaveComplete")),
+                "onDetectComplete" to mapOf("phasedRegistrationNames" to mapOf("bubbled" to "onDetectComplete")),
+            )
+        )
+        return eventTypeConstants
     }
 
     override fun getCommandsMap(): MutableMap<String, Int> {
